@@ -1,1299 +1,1285 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<style>
-		/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript&plugins=line-highlight+line-numbers+toolbar+show-language */
-		/**
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript&plugins=line-highlight+line-numbers+toolbar+show-language */
+    /**
      * prism.js default theme for JavaScript, CSS and HTML
      * Based on dabblet (http://dabblet.com)
      * @author Lea Verou
      */
-		code[class*="language-"],
-		pre[class*="language-"] {
-			color: black;
-			background: none;
-			text-shadow: 0 1px white;
-			font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-			text-align: left;
-			white-space: pre;
-			word-spacing: normal;
-			word-break: normal;
-			word-wrap: normal;
-			line-height: 1.5;
-			-moz-tab-size: 4;
-			-o-tab-size: 4;
-			tab-size: 4;
-			-webkit-hyphens: none;
-			-moz-hyphens: none;
-			-ms-hyphens: none;
-			hyphens: none;
-		}
-
-		pre[class*="language-"]::-moz-selection,
-		pre[class*="language-"] ::-moz-selection,
-		code[class*="language-"]::-moz-selection,
-		code[class*="language-"] ::-moz-selection {
-			text-shadow: none;
-			background: #98d8b7;
-		}
-
-		pre[class*="language-"]::selection,
-		pre[class*="language-"] ::selection,
-		code[class*="language-"]::selection,
-		code[class*="language-"] ::selection {
-			text-shadow: none;
-			background: #98d8b7;
-		}
-
-		@media print {
-
-			code[class*="language-"],
-			pre[class*="language-"] {
-				text-shadow: none;
-			}
-		}
-
-		/* Code blocks */
-		pre[class*="language-"] {
-			padding: 1em;
-			margin: .5em 0;
-			overflow: auto;
-		}
-
-		:not(pre)>code[class*="language-"],
-		pre[class*="language-"] {
-			background: #f5f2f0;
-		}
-
-		/* Inline code */
-		:not(pre)>code[class*="language-"] {
-			padding: .1em;
-			border-radius: .3em;
-			white-space: normal;
-		}
-
-		.token.comment,
-		.token.prolog,
-		.token.doctype,
-		.token.cdata {
-			color: slategray;
-		}
-
-		.token.punctuation {
-			color: #999;
-		}
-
-		.namespace {
-			opacity: .7;
-		}
-
-		.token.property,
-		.token.tag,
-		.token.boolean,
-		.token.number,
-		.token.constant,
-		.token.symbol,
-		.token.deleted {
-			color: #905;
-		}
-
-		.token.selector,
-		.token.attr-name,
-		.token.string,
-		.token.char,
-		.token.builtin,
-		.token.inserted {
-			color: #690;
-		}
-
-		.token.operator,
-		.token.entity,
-		.token.url,
-		.language-css .token.string,
-		.style .token.string {
-			color: #a67f59;
-			background: hsla(0, 0%, 100%, .5);
-		}
-
-		.token.atrule,
-		.token.attr-value,
-		.token.keyword {
-			color: #07a;
-		}
-
-		.token.function {
-			color: #DD4A68;
-		}
-
-		.token.regex,
-		.token.important,
-		.token.variable {
-			color: #e90;
-		}
-
-		.token.important,
-		.token.bold {
-			font-weight: bold;
-		}
-
-		.token.italic {
-			font-style: italic;
-		}
-
-		.token.entity {
-			cursor: help;
-		}
-
-		pre[data-line] {
-			position: relative;
-			padding: 1em 0 1em 3em;
-		}
-
-		.line-highlight {
-			position: absolute;
-			left: 0;
-			right: 0;
-			padding: inherit 0;
-			margin-top: 1em;
-			/* Same as .prism’s padding-top */
-			background: hsla(24, 20%, 50%, .08);
-			background: linear-gradient(to right, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
-			pointer-events: none;
-			line-height: inherit;
-			white-space: pre;
-		}
-
-		.line-highlight:before,
-		.line-highlight[data-end]:after {
-			content: attr(data-start);
-			position: absolute;
-			top: .4em;
-			left: .6em;
-			min-width: 1em;
-			padding: 0 .5em;
-			background-color: hsla(24, 20%, 50%, .4);
-			color: hsl(24, 20%, 95%);
-			font: bold 65%/1.5 sans-serif;
-			text-align: center;
-			vertical-align: .3em;
-			border-radius: 999px;
-			text-shadow: none;
-			box-shadow: 0 1px white;
-		}
-
-		.line-highlight[data-end]:after {
-			content: attr(data-end);
-			top: auto;
-			bottom: .4em;
-		}
-
-		pre.line-numbers {
-			position: relative;
-			padding-left: 3.8em;
-			counter-reset: linenumber;
-		}
-
-		pre.line-numbers>code {
-			position: relative;
-		}
-
-		.line-numbers .line-numbers-rows {
-			position: absolute;
-			pointer-events: none;
-			top: 0;
-			font-size: 100%;
-			left: -3.8em;
-			width: 3em;
-			/* works for line-numbers below 1000 lines */
-			letter-spacing: -1px;
-			border-right: 1px solid #999;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-
-		.line-numbers-rows>span {
-			pointer-events: none;
-			display: block;
-			counter-increment: linenumber;
-		}
-
-		.line-numbers-rows>span:before {
-			content: counter(linenumber);
-			color: #999;
-			display: block;
-			padding-right: 0.8em;
-			text-align: right;
-		}
-
-		pre.code-toolbar {
-			position: relative;
-		}
-
-		pre.code-toolbar>.toolbar {
-			position: absolute;
-			top: .3em;
-			right: .2em;
-			transition: opacity 0.3s ease-in-out;
-			opacity: 0;
-		}
-
-		pre.code-toolbar:hover>.toolbar {
-			opacity: 1;
-		}
-
-		pre.code-toolbar>.toolbar .toolbar-item {
-			display: inline-block;
-		}
-
-		pre.code-toolbar>.toolbar a {
-			cursor: pointer;
-		}
-
-		pre.code-toolbar>.toolbar button {
-			background: none;
-			border: 0;
-			color: inherit;
-			font: inherit;
-			line-height: normal;
-			overflow: visible;
-			padding: 0;
-			-webkit-user-select: none;
-			/* for button */
-			-moz-user-select: none;
-			-ms-user-select: none;
-		}
-
-		pre.code-toolbar>.toolbar a,
-		pre.code-toolbar>.toolbar button,
-		pre.code-toolbar>.toolbar span {
-			color: #bbb;
-			font-size: .8em;
-			padding: 0 .5em;
-			background: #f5f2f0;
-			background: rgba(224, 224, 224, 0.2);
-			box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
-			border-radius: .5em;
-		}
-
-		pre.code-toolbar>.toolbar a:hover,
-		pre.code-toolbar>.toolbar a:focus,
-		pre.code-toolbar>.toolbar button:hover,
-		pre.code-toolbar>.toolbar button:focus,
-		pre.code-toolbar>.toolbar span:hover,
-		pre.code-toolbar>.toolbar span:focus {
-			color: inherit;
-			text-decoration: none;
-		}
-	</style>
-
-	<style>
-		@keyframes hover-color {
-			from {
-				border-color: #c0c0c0;
-			}
-
-			to {
-				border-color: #53b783;
-			}
-		}
-
-		.magic-radio,
-		.magic-checkbox {
-			position: absolute;
-			display: none;
-		}
-
-		.magic-radio[disabled],
-		.magic-checkbox[disabled] {
-			cursor: not-allowed;
-		}
-
-		.magic-radio+label,
-		.magic-checkbox+label {
-			position: relative;
-			display: block;
-			padding-left: 30px;
-			cursor: pointer;
-			vertical-align: middle;
-		}
-
-		.magic-radio+label:hover:before,
-		.magic-checkbox+label:hover:before {
-			animation-duration: 0.4s;
-			animation-fill-mode: both;
-			animation-name: hover-color;
-		}
-
-		.magic-radio+label:before,
-		.magic-checkbox+label:before {
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: inline-block;
-			width: 20px;
-			height: 20px;
-			content: '';
-			border: 1px solid #c0c0c0;
-		}
-
-		.magic-radio+label:after,
-		.magic-checkbox+label:after {
-			position: absolute;
-			display: none;
-			content: '';
-		}
-
-		.magic-radio[disabled]+label,
-		.magic-checkbox[disabled]+label {
-			cursor: not-allowed;
-			color: #e4e4e4;
-		}
-
-		.magic-radio[disabled]+label:hover,
-		.magic-radio[disabled]+label:before,
-		.magic-radio[disabled]+label:after,
-		.magic-checkbox[disabled]+label:hover,
-		.magic-checkbox[disabled]+label:before,
-		.magic-checkbox[disabled]+label:after {
-			cursor: not-allowed;
-		}
-
-		.magic-radio[disabled]+label:hover:before,
-		.magic-checkbox[disabled]+label:hover:before {
-			border: 1px solid #e4e4e4;
-			animation-name: none;
-		}
-
-		.magic-radio[disabled]+label:before,
-		.magic-checkbox[disabled]+label:before {
-			border-color: #e4e4e4;
-		}
-
-		.magic-radio:checked+label:before,
-		.magic-checkbox:checked+label:before {
-			animation-name: none;
-		}
-
-		.magic-radio:checked+label:after,
-		.magic-checkbox:checked+label:after {
-			display: block;
-		}
-
-		.magic-radio+label:before {
-			border-radius: 50%;
-		}
-
-		.magic-radio+label:after {
-			top: 6px;
-			left: 6px;
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: #53b783;
-		}
-
-		.magic-radio:checked+label:before {
-			border: 1px solid #53b783;
-		}
-
-		.magic-radio:checked[disabled]+label:before {
-			border: 1px solid #c9e2f9;
-		}
-
-		.magic-radio:checked[disabled]+label:after {
-			background: #c9e2f9;
-		}
-
-		.magic-checkbox+label:before {
-			border-radius: 3px;
-		}
-
-		.magic-checkbox+label:after {
-			top: 2px;
-			left: 7px;
-			box-sizing: border-box;
-			width: 6px;
-			height: 12px;
-			transform: rotate(45deg);
-			border-width: 2px;
-			border-style: solid;
-			border-color: #fff;
-			border-top: 0;
-			border-left: 0;
-		}
-
-		.magic-checkbox:checked+label:before {
-			border: #53b783;
-			background: #53b783;
-		}
-
-		.magic-checkbox:checked[disabled]+label:before {
-			border: #c9e2f9;
-			background: #c9e2f9;
-		}
-	</style>
-
-	<style>
-		html,
-		body {
-			height: 100%;
-			width: 100%;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-		}
-
-		body {
-			font-family: Helvetica Neue For Number, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
-			font-size: 14px;
-			line-height: 24px;
-			color: #444;
-		}
-
-		* {
-			padding: 0;
-			margin: 0;
-		}
-
-		::selection {
-			text-shadow: none;
-			color: #fff;
-			background: #98d8b7;
-		}
-
-		::-moz-selection {
-			text-shadow: none;
-			color: #fff;
-			background: #98d8b7;
-		}
-
-		.error-page {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-			height: 100%;
-		}
-
-		.error-logo {
-			position: absolute;
-			top: -15px;
-			right: 0px;
-		}
-
-		.error-stack {
-			background: #f1f1f1;
-			padding: 140px 80px 40px;
-			box-sizing: border-box;
-			border-bottom: 1px solid #e2e2e2;
-		}
-
-		.error-status {
-			color: #afafaf;
-			font-size: 150px;
-			position: absolute;
-			opacity: 0.2;
-			left: 76px;
-			top: 80px;
-			font-weight: 600;
-			margin-bottom: 10px;
-		}
-
-		.error-name {
-			color: #db5461;
-			font-size: 18px;
-			font-family: menlo, 'sans-serif';
-			font-weight: 300;
-			margin-bottom: 15px;
-		}
-
-		.error-title {
-			border-bottom: 1px solid #e0e0e0;
-			padding-bottom: 26px;
-			margin-bottom: 20px;
-			margin-top: 48px;
-		}
-
-		.error-title .box {
-			color: #db5461;
-			font-weight: 700;
-			font-size: 20px;
-			margin-left: 5px;
-		}
-
-		.error-title .context {
-			color: #db5461;
-			font-weight: 400;
-			margin-left: 5px;
-			margin-top: 48px;
-			line-height: 1.5;
-		}
-
-		.error-frames {
-			display: flex;
-			flex-direction: row-reverse;
-			margin-top: 40px;
-		}
-
-		.frame-preview {
-			background: #fff;
-			width: 50%;
-			box-shadow: 0px 0px 9px #d3d3d3;
-			height: 100%;
-			box-sizing: border-box;
-			overflow: auto;
-		}
-
-		.frame-stack {
-			margin-right: 40px;
-			flex: 1;
-			padding: 10px 0;
-			box-sizing: border-box;
-		}
-
-		.frames-list {
-			overflow: auto;
-			max-height: 334px;
-		}
-
-		.frames-filter-selector {
-			margin-bottom: 30px;
-			margin-left: 8px;
-		}
-
-		.request-details {
-			padding: 50px 80px;
-		}
-
-		.request-title {
-			text-transform: uppercase;
-			font-size: 18px;
-			letter-spacing: 1px;
-			padding: 0 5px 5px 5px;
-			margin-bottom: 15px;
-			color: #53b783;
-		}
-
-		.request-details .table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-bottom: 80px;
-		}
-
-		.request-details .tr {
-			display: flex;
-			flex-direction: row;
-		}
-
-		.request-details .tr:nth-of-type(even) {
-			background: #fbfbfb;
-		}
-
-		.request-details .table .td {
-			padding: 6px 5px;
-			font-size: 14px;
-			letter-spacing: 0.4px;
-			color: #455275;
-			border-bottom: 1px solid #e8e8e8;
-			word-break: break-word;
-		}
-
-		.request-details .table .td.title {
-			flex: 1;
-			color: #565655;
-			font-size: 14px;
-			font-weight: 600;
-		}
-
-		.request-details .table .td.content {
-			width: 70%;
-		}
-
-		.request-details .table .td.content.code {
-			background: #fff;
-			width: 70%;
-			box-shadow: 0px 0px 9px #d3d3d3;
-			height: 100%;
-			box-sizing: border-box;
-			overflow: auto;
-		}
-
-		code[class*="language-"],
-		pre[class*="language-"] {
-			background: transparent;
-			font-size: 13px;
-			line-height: 1.8;
-		}
-
-		.line-numbers .line-numbers-rows {
-			border: none;
-		}
-
-		.frame-row {
-			display: flex;
-			justify-content: space-between;
-			padding: 6px 10px 6px 34px;
-			position: relative;
-			cursor: pointer;
-			transition: background 300ms ease;
-		}
-
-		.frame-row.native-frame {
-			display: none;
-			opacity: 0.4;
-		}
-
-		.frame-row.native-frame.force-show {
-			display: flex;
-		}
-
-		.frame-row:after {
-			content: "";
-			background: #db5461;
-			position: absolute;
-			top: 50%;
-			left: 10px;
-			transform: translateY(-50%);
-			height: 10px;
-			width: 10px;
-			border-radius: 24px;
-		}
-
-		.frame-row:hover,
-		.frame-row.active {
-			background: #fff;
-		}
-
-		.frame-row.active {
-			opacity: 1;
-		}
-
-		.frame-row-filepath {
-			color: #455275;
-			font-weight: 600;
-			margin-right: 15px;
-		}
-
-		.frame-context {
-			display: none;
-		}
-
-		.frame-row-code {
-			color: #999;
-		}
-
-		#frame-file {
-			color: #455275;
-			font-weight: 600;
-			border-bottom: 1px solid #e8e8e8;
-			padding: 10px 22px;
-		}
-
-		#frame-method {
-			color: #999;
-			font-weight: 400;
-			border-top: 1px solid #e8e8e8;
-			padding: 10px 22px;
-		}
-
-		.is-hidden {
-			display: none;
-		}
-	</style>
+    code[class*="language-"],
+    pre[class*="language-"] {
+      color: black;
+      background: none;
+      text-shadow: 0 1px white;
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      text-align: left;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      word-wrap: normal;
+      line-height: 1.5;
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+      -webkit-hyphens: none;
+      -moz-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+    pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+    code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+      text-shadow: none;
+      background: #98d8b7;
+    }
+    pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+    code[class*="language-"]::selection, code[class*="language-"] ::selection {
+      text-shadow: none;
+      background: #98d8b7;
+    }
+    @media print {
+      code[class*="language-"],
+      pre[class*="language-"] {
+        text-shadow: none;
+      }
+    }
+    /* Code blocks */
+    pre[class*="language-"] {
+      padding: 1em;
+      margin: .5em 0;
+      overflow: auto;
+    }
+    :not(pre) > code[class*="language-"],
+    pre[class*="language-"] {
+      background: #f5f2f0;
+    }
+    /* Inline code */
+    :not(pre) > code[class*="language-"] {
+      padding: .1em;
+      border-radius: .3em;
+      white-space: normal;
+    }
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: slategray;
+    }
+    .token.punctuation {
+      color: #999;
+    }
+    .namespace {
+      opacity: .7;
+    }
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #905;
+    }
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #690;
+    }
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #a67f59;
+      background: hsla(0, 0%, 100%, .5);
+    }
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #07a;
+    }
+    .token.function {
+      color: #DD4A68;
+    }
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: #e90;
+    }
+    .token.important,
+    .token.bold {
+      font-weight: bold;
+    }
+    .token.italic {
+      font-style: italic;
+    }
+    .token.entity {
+      cursor: help;
+    }
+    pre[data-line] {
+      position: relative;
+      padding: 1em 0 1em 3em;
+    }
+    .line-highlight {
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding: inherit 0;
+      margin-top: 1em; /* Same as .prism’s padding-top */
+      background: hsla(24, 20%, 50%,.08);
+      background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+      pointer-events: none;
+      line-height: inherit;
+      white-space: pre;
+    }
+      .line-highlight:before,
+      .line-highlight[data-end]:after {
+        content: attr(data-start);
+        position: absolute;
+        top: .4em;
+        left: .6em;
+        min-width: 1em;
+        padding: 0 .5em;
+        background-color: hsla(24, 20%, 50%,.4);
+        color: hsl(24, 20%, 95%);
+        font: bold 65%/1.5 sans-serif;
+        text-align: center;
+        vertical-align: .3em;
+        border-radius: 999px;
+        text-shadow: none;
+        box-shadow: 0 1px white;
+      }
+      .line-highlight[data-end]:after {
+        content: attr(data-end);
+        top: auto;
+        bottom: .4em;
+      }
+    pre.line-numbers {
+      position: relative;
+      padding-left: 3.8em;
+      counter-reset: linenumber;
+    }
+    pre.line-numbers > code {
+      position: relative;
+    }
+    .line-numbers .line-numbers-rows {
+      position: absolute;
+      pointer-events: none;
+      top: 0;
+      font-size: 100%;
+      left: -3.8em;
+      width: 3em; /* works for line-numbers below 1000 lines */
+      letter-spacing: -1px;
+      border-right: 1px solid #999;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+      .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+      }
+        .line-numbers-rows > span:before {
+          content: counter(linenumber);
+          color: #999;
+          display: block;
+          padding-right: 0.8em;
+          text-align: right;
+        }
+    pre.code-toolbar {
+      position: relative;
+    }
+    pre.code-toolbar > .toolbar {
+      position: absolute;
+      top: .3em;
+      right: .2em;
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+    pre.code-toolbar:hover > .toolbar {
+      opacity: 1;
+    }
+    pre.code-toolbar > .toolbar .toolbar-item {
+      display: inline-block;
+    }
+    pre.code-toolbar > .toolbar a {
+      cursor: pointer;
+    }
+    pre.code-toolbar > .toolbar button {
+      background: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      line-height: normal;
+      overflow: visible;
+      padding: 0;
+      -webkit-user-select: none; /* for button */
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    pre.code-toolbar > .toolbar a,
+    pre.code-toolbar > .toolbar button,
+    pre.code-toolbar > .toolbar span {
+      color: #bbb;
+      font-size: .8em;
+      padding: 0 .5em;
+      background: #f5f2f0;
+      background: rgba(224, 224, 224, 0.2);
+      box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+      border-radius: .5em;
+    }
+    pre.code-toolbar > .toolbar a:hover,
+    pre.code-toolbar > .toolbar a:focus,
+    pre.code-toolbar > .toolbar button:hover,
+    pre.code-toolbar > .toolbar button:focus,
+    pre.code-toolbar > .toolbar span:hover,
+    pre.code-toolbar > .toolbar span:focus {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+
+  <style>
+    @keyframes hover-color {
+      from {
+        border-color: #c0c0c0; }
+      to {
+        border-color: #53b783; } }
+    .magic-radio,
+    .magic-checkbox {
+      position: absolute;
+      display: none; }
+    .magic-radio[disabled],
+    .magic-checkbox[disabled] {
+      cursor: not-allowed; }
+    .magic-radio + label,
+    .magic-checkbox + label {
+      position: relative;
+      display: block;
+      padding-left: 30px;
+      cursor: pointer;
+      vertical-align: middle; }
+      .magic-radio + label:hover:before,
+      .magic-checkbox + label:hover:before {
+        animation-duration: 0.4s;
+        animation-fill-mode: both;
+        animation-name: hover-color; }
+      .magic-radio + label:before,
+      .magic-checkbox + label:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        content: '';
+        border: 1px solid #c0c0c0; }
+      .magic-radio + label:after,
+      .magic-checkbox + label:after {
+        position: absolute;
+        display: none;
+        content: ''; }
+    .magic-radio[disabled] + label,
+    .magic-checkbox[disabled] + label {
+      cursor: not-allowed;
+      color: #e4e4e4; }
+      .magic-radio[disabled] + label:hover, .magic-radio[disabled] + label:before, .magic-radio[disabled] + label:after,
+      .magic-checkbox[disabled] + label:hover,
+      .magic-checkbox[disabled] + label:before,
+      .magic-checkbox[disabled] + label:after {
+        cursor: not-allowed; }
+      .magic-radio[disabled] + label:hover:before,
+      .magic-checkbox[disabled] + label:hover:before {
+        border: 1px solid #e4e4e4;
+        animation-name: none; }
+      .magic-radio[disabled] + label:before,
+      .magic-checkbox[disabled] + label:before {
+        border-color: #e4e4e4; }
+    .magic-radio:checked + label:before,
+    .magic-checkbox:checked + label:before {
+      animation-name: none; }
+    .magic-radio:checked + label:after,
+    .magic-checkbox:checked + label:after {
+      display: block; }
+    .magic-radio + label:before {
+      border-radius: 50%; }
+    .magic-radio + label:after {
+      top: 6px;
+      left: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #53b783; }
+    .magic-radio:checked + label:before {
+      border: 1px solid #53b783; }
+    .magic-radio:checked[disabled] + label:before {
+      border: 1px solid #c9e2f9; }
+    .magic-radio:checked[disabled] + label:after {
+      background: #c9e2f9; }
+    .magic-checkbox + label:before {
+      border-radius: 3px; }
+    .magic-checkbox + label:after {
+      top: 2px;
+      left: 7px;
+      box-sizing: border-box;
+      width: 6px;
+      height: 12px;
+      transform: rotate(45deg);
+      border-width: 2px;
+      border-style: solid;
+      border-color: #fff;
+      border-top: 0;
+      border-left: 0; }
+    .magic-checkbox:checked + label:before {
+      border: #53b783;
+      background: #53b783; }
+    .magic-checkbox:checked[disabled] + label:before {
+      border: #c9e2f9;
+      background: #c9e2f9; }
+  </style>
+
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-family: Helvetica Neue For Number,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
+      font-size: 14px;
+      line-height: 24px;
+      color: #444;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    ::selection {
+      text-shadow: none;
+      color: #fff;
+      background: #98d8b7;
+    }
+    ::-moz-selection {
+      text-shadow: none;
+      color: #fff;
+      background: #98d8b7;
+    }
+    .error-page {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .error-logo {
+      position: absolute;
+      top: -15px;
+      right: 0px;
+    }
+    .error-stack {
+      background: #f1f1f1;
+      padding: 140px 80px 40px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #e2e2e2;
+    }
+    .error-status {
+      color: #afafaf;
+      font-size: 150px;
+      position: absolute;
+      opacity: 0.2;
+      left: 76px;
+      top: 80px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .error-name {
+      color: #db5461;
+      font-size: 18px;
+      font-family: menlo, 'sans-serif';
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+    .error-title {
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 26px;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    .error-title .box {
+      color: #db5461;
+      font-weight: 700;
+      font-size: 20px;
+      margin-left: 5px;
+    }
+    .error-title .context {
+      color: #db5461;
+      font-weight: 400;
+      margin-left: 5px;
+      margin-top: 48px;
+      line-height: 1.5;
+    }
+    .error-frames {
+      display: flex;
+      flex-direction: row-reverse;
+      margin-top: 40px;
+    }
+    .frame-preview {
+      background: #fff;
+      width: 50%;
+      box-shadow: 0px 0px 9px #d3d3d3;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+    .frame-stack {
+      margin-right: 40px;
+      flex: 1;
+      padding: 10px 0;
+      box-sizing: border-box;
+    }
+    .frames-list {
+      overflow: auto;
+      max-height: 334px;
+    }
+    .frames-filter-selector {
+      margin-bottom: 30px;
+      margin-left: 8px;
+    }
+    .request-details {
+      padding: 50px 80px;
+    }
+    .request-title {
+      text-transform: uppercase;
+      font-size: 18px;
+      letter-spacing: 1px;
+      padding: 0 5px 5px 5px;
+      margin-bottom: 15px;
+      color: #53b783;
+    }
+    .request-details .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 80px;
+    }
+    .request-details .tr {
+      display: flex;
+      flex-direction: row;
+    }
+    .request-details .tr:nth-of-type(even) {
+      background: #fbfbfb;
+    }
+    .request-details .table .td {
+      padding: 6px 5px;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      color: #455275;
+      border-bottom: 1px solid #e8e8e8;
+      word-break: break-word;
+    }
+    .request-details .table .td.title {
+      flex: 1;
+      color: #565655;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .request-details .table .td.content {
+      width: 70%;
+    }
+    .request-details .table .td.content.code {
+      background: #fff;
+      width: 70%;
+      box-shadow: 0px 0px 9px #d3d3d3;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+    code[class*="language-"], pre[class*="language-"] {
+      background: transparent;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .line-numbers .line-numbers-rows {
+      border: none;
+    }
+    .frame-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 10px 6px 34px;
+      position: relative;
+      cursor: pointer;
+      transition: background 300ms ease;
+    }
+    .frame-row.native-frame {
+      display: none;
+      opacity: 0.4;
+    }
+    .frame-row.native-frame.force-show {
+      display: flex;
+    }
+    .frame-row:after {
+      content: "";
+      background: #db5461;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      height: 10px;
+      width: 10px;
+      border-radius: 24px;
+    }
+    .frame-row:hover, .frame-row.active {
+      background: #fff;
+    }
+    .frame-row.active {
+      opacity: 1;
+    }
+    .frame-row-filepath {
+      color: #455275;
+      font-weight: 600;
+      margin-right: 15px;
+    }
+    .frame-context {
+      display: none;
+    }
+    .frame-row-code {
+      color: #999;
+    }
+    #frame-file {
+      color: #455275;
+      font-weight: 600;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 10px 22px;
+    }
+    #frame-method {
+      color: #999;
+      font-weight: 400;
+      border-top: 1px solid #e8e8e8;
+      padding: 10px 22px;
+    }
+    .is-hidden {
+      display: none;
+    }
+</style>
 </head>
-
 <body>
-	<section class="error-page">
-		<section class="error-stack">
-			<h3 class="error-status">500</h3>
-			<div class="error-title">
-				<h1 class="box">Error in &#x2F;login?username&#x3D;123&amp;password&#x3D;456</h1>
-				<div class="context">&quot;maxAge&quot; is not allowed in &quot;options&quot;</div>
-			</div>
+  <section class="error-page">
+    <section class="error-stack">
+      <h3 class="error-status">401</h3>
+      <div class="error-title">
+        <h1 class="box">UnauthorizedError in &#x2F;site&#x2F;index</h1>
+        <div class="context">Format is Authorization: Bearer [token] (code: credentials_bad_format)</div>
+      </div>
 
-			<img class="error-logo" src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"/>
+      <img class="error-logo" src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"/>
 
-			<div class="error-frames">
-				<div class="frame-preview is-hidden">
-					<div id="frame-file"></div>
-					<div id="frame-code">
-						<pre class="line-numbers"><code id="code-drop"></code></pre>
-					</div>
-					<div id="frame-method"></div>
-				</div>
+      <div class="error-frames">
+        <div class="frame-preview is-hidden">
+          <div id="frame-file"></div>
+          <div id="frame-code"><pre class="line-numbers"><code id="code-drop"></code></pre></div>
+          <div id="frame-method"></div>
+        </div>
 
-				<div class="frame-stack">
-					<div class="frames-filter-selector">
-						<input type="checkbox" class="magic-checkbox" name="frames-filter" id="frames-filter">
-						<label for="frames-filter">Show all frames</label>
-					</div>
+        <div class="frame-stack">
+          <div class="frames-filter-selector">
+            <input type="checkbox" class="magic-checkbox" name="frames-filter" id="frames-filter">
+            <label for="frames-filter">Show all frames</label>
+          </div>
 
-					<div class="frames-list">
+          <div class="frames-list">
+              
+              <div class="frame-row active native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-jwt2&#x2F;lib&#x2F;index.js:81:15
+                </div>
+                <div class="frame-row-code">
+                  middleware
+                </div>
+                <div class="frame-context"
+                  data-start="76"
+                  data-line="81"
+                  data-file="node_modules&#x2F;koa-jwt2&#x2F;lib&#x2F;index.js"
+                  data-method="middleware"
+                  data-extname="js"
+                  data-line-column="81:15"
+                >          } else {
+            return await next();
+          }
+        }
+      } else {
+        throw new UnauthorizedError(&quot;credentials_bad_format&quot;, {
+          message: &quot;Format is Authorization: Bearer [token]&quot;
+        });
+      }
+    }
 
-						<div class="frame-row active native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;jsonwebtoken&#x2F;sign.js:47:17
-							</div>
-							<div class="frame-row-code">
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js:44:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="39"
+                  data-line="44"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="44:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, function next () {
+          return dispatch(i + 1)
+        }))
+      } catch (err) {
+        return Promise.reject(err)
+      }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js:45:18
+                </div>
+                <div class="frame-row-code">
+                  next
+                </div>
+                <div class="frame-context"
+                  data-start="40"
+                  data-line="45"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="next"
+                  data-extname="js"
+                  data-line-column="45:18"
+                >      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, function next () {
+          return dispatch(i + 1)
+        }))
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;lib&#x2F;router.js:190:18
+                </div>
+                <div class="frame-row-code">
+                  
+                </div>
+                <div class="frame-context"
+                  data-start="185"
+                  data-line="190"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;lib&#x2F;router.js"
+                  data-method=""
+                  data-extname="js"
+                  data-line-column="190:18"
+                >        memo.push(function(ctx, next) {
+          ctx.captures &#x3D; layer.captures(path, ctx.captures);
+          ctx.params &#x3D; layer.params(path, ctx.captures, ctx.params);
+          ctx.routerName &#x3D; layer.name;
+          ctx.routerPath &#x3D; layer.path;
+          return next();
+        });
+        return memo.concat(layer.stack);
+      }, []);
 
-							</div>
-							<div class="frame-context" data-start="42" data-line="47"
-								data-file="node_modules&#x2F;jsonwebtoken&#x2F;sign.js" data-method="" data-extname="js"
-								data-line-column="47:17"> Object.keys(object)
-								.forEach(function(key) {
-								var validator &#x3D; schema[key];
-								if (!validator) {
-								if (!allowUnknown) {
-								throw new Error(&#39;&quot;&#39; + key + &#39;&quot; is not allowed in &quot;&#39; +
-								parameterName + &#39;&quot;&#39;);
-								}
-								return;
-								}
-								if (!validator.isValid(object[key])) {
-								throw new Error(validator.message);
-							</div>
-						</div>
+      return compose(layerChain)(ctx, next);
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js:44:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="39"
+                  data-line="44"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="44:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, function next () {
+          return dispatch(i + 1)
+        }))
+      } catch (err) {
+        return Promise.reject(err)
+      }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js:36:12
+                </div>
+                <div class="frame-row-code">
+                  
+                </div>
+                <div class="frame-context"
+                  data-start="31"
+                  data-line="36"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method=""
+                  data-extname="js"
+                  data-line-column="36:12"
+                >   *&#x2F;
 
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;jsonwebtoken&#x2F;sign.js:43:6
-							</div>
-							<div class="frame-row-code">
-								validate
-							</div>
-							<div class="frame-context" data-start="38" data-line="43"
-								data-file="node_modules&#x2F;jsonwebtoken&#x2F;sign.js" data-method="validate"
-								data-extname="js" data-line-column="43:6">function validate(schema, allowUnknown,
-								object, parameterName) {
-								if (!isPlainObject(object)) {
-								throw new Error(&#39;Expected &quot;&#39; + parameterName + &#39;&quot; to be a plain
-								object.&#39;);
-								}
-								Object.keys(object)
-								.forEach(function(key) {
-								var validator &#x3D; schema[key];
-								if (!validator) {
-								if (!allowUnknown) {
-								throw new Error(&#39;&quot;&#39; + key + &#39;&quot; is not allowed in &quot;&#39; +
-								parameterName + &#39;&quot;&#39;);
-								}
-							</div>
-						</div>
+  return function (context, next) {
+    &#x2F;&#x2F; last called middleware #
+    let index &#x3D; -1
+    return dispatch(0)
+    function dispatch (i) {
+      if (i &lt;&#x3D; index) return Promise.reject(new Error(&#39;next() called multiple times&#39;))
+      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;@eggjs&#x2F;router&#x2F;lib&#x2F;router.js:195:33
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="190"
+                  data-line="195"
+                  data-file="node_modules&#x2F;@eggjs&#x2F;router&#x2F;lib&#x2F;router.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="195:33"
+                >          return next();
+        });
+        return memo.concat(layer.stack);
+      }, []);
 
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;jsonwebtoken&#x2F;sign.js:58:10
-							</div>
-							<div class="frame-row-code">
-								validateOptions
-							</div>
-							<div class="frame-context" data-start="53" data-line="58"
-								data-file="node_modules&#x2F;jsonwebtoken&#x2F;sign.js" data-method="validateOptions"
-								data-extname="js" data-line-column="58:10"> }
-								});
-								}
+      return compose(layerChain)(ctx, next);
+    };
 
-								function validateOptions(options) {
-								return validate(sign_options_schema, false, options, &#39;options&#39;);
-								}
+    dispatch.router &#x3D; this;
 
-								function validatePayload(payload) {
-								return validate(registered_claims_schema, true, payload, &#39;payload&#39;);
-								}
-							</div>
-						</div>
+    return dispatch;
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row ">
+                <div class="frame-row-filepath">
+                  app&#x2F;middleware&#x2F;listen.js:4:11
+                </div>
+                <div class="frame-row-code">
+                  
+                </div>
+                <div class="frame-context"
+                  data-start="1"
+                  data-line="4"
+                  data-file="app&#x2F;middleware&#x2F;listen.js"
+                  data-method=""
+                  data-extname="js"
+                  data-line-column="4:11"
+                >&#39;use strict&#39;;
+module.exports &#x3D; () &#x3D;&gt; {
+  return async function (ctx, next) {
+    await next();
+    console.log(ctx.request.url)
+  }
+};
 
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;jsonwebtoken&#x2F;sign.js:141:5
-							</div>
-							<div class="frame-row-code">
-								Object.module.exports [as sign]
-							</div>
-							<div class="frame-context" data-start="136" data-line="141"
-								data-file="node_modules&#x2F;jsonwebtoken&#x2F;sign.js"
-								data-method="Object.module.exports [as sign]" data-extname="js"
-								data-line-column="141:5"> if (typeof payload.nbf !&#x3D;&#x3D; &#39;undefined&#39;
-								&amp;&amp; typeof options.notBefore !&#x3D;&#x3D; &#39;undefined&#39;) {
-								return failure(new Error(&#39;Bad &quot;options.notBefore&quot; option the payload
-								already has an &quot;nbf&quot; property.&#39;));
-								}
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row ">
+                <div class="frame-row-filepath">
+                  app&#x2F;middleware&#x2F;auth.js:7:18
+                </div>
+                <div class="frame-row-code">
+                  auth
+                </div>
+                <div class="frame-context"
+                  data-start="2"
+                  data-line="7"
+                  data-file="app&#x2F;middleware&#x2F;auth.js"
+                  data-method="auth"
+                  data-extname="js"
+                  data-line-column="7:18"
+                >&#x2F;&#x2F; 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+&#x2F;&#x2F; 50008:令牌非法；50012:其他客户端登录；50014:令牌过期；
+module.exports &#x3D; options &#x3D;&gt; {
+  return async function auth(ctx, next) {
+    &#x2F;&#x2F; 跳过token验证，缓兵之计
+    return await next()
+    &#x2F;&#x2F; 开启 GraphiQL IDE 调试时，所有的请求放过
+    if (ctx.app.config.graphql.graphiql) {
+      await next()
+      return
+    }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;egg-graphql&#x2F;app&#x2F;middleware&#x2F;graphql.js:74:11
+                </div>
+                <div class="frame-row-code">
+                  
+                </div>
+                <div class="frame-context"
+                  data-start="69"
+                  data-line="74"
+                  data-file="node_modules&#x2F;egg-graphql&#x2F;app&#x2F;middleware&#x2F;graphql.js"
+                  data-method=""
+                  data-extname="js"
+                  data-line-column="74:11"
+                >          context: ctx,
+        }
+      );
+      return graphqlKoa(serverOptions)(ctx);
+    }
+    await next();
+  };
+};
 
-								try {
-								validateOptions(options);
-								}
-								catch (error) {
-								return failure(error);
-								}
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;egg-core&#x2F;lib&#x2F;loader&#x2F;mixin&#x2F;middleware.js:111:29
+                </div>
+                <div class="frame-row-code">
+                  fn
+                </div>
+                <div class="frame-context"
+                  data-start="106"
+                  data-line="111"
+                  data-file="node_modules&#x2F;egg-core&#x2F;lib&#x2F;loader&#x2F;mixin&#x2F;middleware.js"
+                  data-method="fn"
+                  data-extname="js"
+                  data-line-column="111:29"
+                >  &#x2F;&#x2F; support options.match and options.ignore
+  if (!options.match &amp;&amp; !options.ignore) return mw;
+  const match &#x3D; pathMatching(options);
 
-							</div>
-						</div>
+  const fn &#x3D; (ctx, next) &#x3D;&gt; {
+    if (!match(ctx)) return next();
+    return mw(ctx, next);
+  };
+  fn._name &#x3D; mw._name + &#39;middlewareWrapper&#39;;
+  return fn;
+}
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row ">
+                <div class="frame-row-filepath">
+                  app&#x2F;middleware&#x2F;notfound_handler.js:3:11
+                </div>
+                <div class="frame-row-code">
+                  notFoundHandler
+                </div>
+                <div class="frame-context"
+                  data-start="1"
+                  data-line="3"
+                  data-file="app&#x2F;middleware&#x2F;notfound_handler.js"
+                  data-method="notFoundHandler"
+                  data-extname="js"
+                  data-line-column="3:11"
+                >module.exports &#x3D; () &#x3D;&gt; {
+  return async function notFoundHandler(ctx, next) {
+    await next();
+    if (ctx.status &#x3D;&#x3D;&#x3D; 404 &amp;&amp; !ctx.body) {
+      if (ctx.acceptJSON) {
+        ctx.body &#x3D; { error: &#39;Not Found&#39; };
+      } else {
+        ctx.body &#x3D; &#39;&lt;h1&gt;Page Not Found&lt;&#x2F;h1&gt;&#39;;
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compress&#x2F;index.js:38:11
+                </div>
+                <div class="frame-row-code">
+                  
+                </div>
+                <div class="frame-context"
+                  data-start="33"
+                  data-line="38"
+                  data-file="node_modules&#x2F;koa-compress&#x2F;index.js"
+                  data-method=""
+                  data-extname="js"
+                  data-line-column="38:11"
+                >  if (typeof threshold &#x3D;&#x3D;&#x3D; &#39;string&#39;) threshold &#x3D; bytes(threshold)
 
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-jwt&#x2F;app&#x2F;extend&#x2F;application.js:24:20
-							</div>
-							<div class="frame-row-code">
-								AsyncFunction.&lt;computed&gt;.sign
-							</div>
-							<div class="frame-context" data-start="19" data-line="24"
-								data-file="node_modules&#x2F;egg-jwt&#x2F;app&#x2F;extend&#x2F;application.js"
-								data-method="AsyncFunction.&lt;computed&gt;.sign" data-extname="js"
-								data-line-column="24:20"> } else if (typeof options &#x3D;&#x3D;&#x3D;
-								&#39;function&#39;) {
-								callback &#x3D; options;
-								options &#x3D; {};
-								}
+  return async (ctx, next) &#x3D;&gt; {
+    ctx.vary(&#39;Accept-Encoding&#39;)
 
-								return jwt.sign(
-								payload,
-								secret,
-								Object.assign({}, config.sign || {}, options),
-								callback
-								);
-							</div>
-						</div>
+    await next()
 
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;service&#x2F;token.js:18:27
-							</div>
-							<div class="frame-row-code">
-								TokenService.mySignJwt
-							</div>
-							<div class="frame-context" data-start="13" data-line="18"
-								data-file="app&#x2F;service&#x2F;token.js" data-method="TokenService.mySignJwt"
-								data-extname="js" data-line-column="18:27"> exp: Math.floor(Date.now() &#x2F; 1000) +
-								(60 * 60 * 3600 * 24 * 7),
-								}, secert_key);
-								}
-								async mySignJwt(options) {
-								const { app } &#x3D; this
-								const token &#x3D; app.jwt.sign({
-								...options
-								}, app.config.jwt.secret, {
-								expiresIn: &#39;30s&#39;,
-								maxAge: &#39;1d&#39;,
-								});
-							</div>
-						</div>
+    let { body } &#x3D; ctx
+    if (!body) return
+    if (ctx.res.headersSent || !ctx.writable) return
+    if (ctx.compress &#x3D;&#x3D;&#x3D; false) return
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;egg-core&#x2F;lib&#x2F;loader&#x2F;mixin&#x2F;middleware.js:111:29
+                </div>
+                <div class="frame-row-code">
+                  fn
+                </div>
+                <div class="frame-context"
+                  data-start="106"
+                  data-line="111"
+                  data-file="node_modules&#x2F;egg-core&#x2F;lib&#x2F;loader&#x2F;mixin&#x2F;middleware.js"
+                  data-method="fn"
+                  data-extname="js"
+                  data-line-column="111:29"
+                >  &#x2F;&#x2F; support options.match and options.ignore
+  if (!options.match &amp;&amp; !options.ignore) return mw;
+  const match &#x3D; pathMatching(options);
 
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;service&#x2F;user.js:81:46
-							</div>
-							<div class="frame-row-code">
-								UserService.login
-							</div>
-							<div class="frame-context" data-start="76" data-line="81"
-								data-file="app&#x2F;service&#x2F;user.js" data-method="UserService.login"
-								data-extname="js" data-line-column="81:46"> const { ctx } &#x3D; this;
-								const secert_key &#x3D; ctx.app.config.jwt.jwtSecret;
-								const user &#x3D; await this.findUser(data)
-								if (user) {
-								&#x2F;&#x2F; 制作jwt
-								const result &#x3D; await ctx.service.token.mySignJwt(user)
-								return result
-								}
-								}
-								&#x2F;&#x2F; 查找用户
-								async findUser(data) {
-							</div>
-						</div>
+  const fn &#x3D; (ctx, next) &#x3D;&gt; {
+    if (!match(ctx)) return next();
+    return mw(ctx, next);
+  };
+  fn._name &#x3D; mw._name + &#39;middlewareWrapper&#39;;
+  return fn;
+}
+                </div>
+              </div>
+              
+              <div class="frame-row native-frame">
+                <div class="frame-row-filepath">
+                  node_modules&#x2F;koa-compose&#x2F;index.js:42:32
+                </div>
+                <div class="frame-row-code">
+                  dispatch
+                </div>
+                <div class="frame-context"
+                  data-start="37"
+                  data-line="42"
+                  data-file="node_modules&#x2F;koa-compose&#x2F;index.js"
+                  data-method="dispatch"
+                  data-extname="js"
+                  data-line-column="42:32"
+                >      index &#x3D; i
+      let fn &#x3D; middleware[i]
+      if (i &#x3D;&#x3D;&#x3D; middleware.length) fn &#x3D; next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								internal&#x2F;process&#x2F;task_queues.js:93:5
-							</div>
-							<div class="frame-row-code">
-								processTicksAndRejections
-							</div>
-							<div class="frame-context" data-start="" data-line="93"
-								data-file="internal&#x2F;process&#x2F;task_queues.js"
-								data-method="processTicksAndRejections" data-extname="js" data-line-column="93:5">
+    <section class="request-details">
+      <h2 class="request-title"> Request Details </h2>
+      <div class="table">
+        <div class="tr">
+          <div class="td title"> URI </div>
+          <div class="td content">&#x2F;site&#x2F;index</div>
+        </div>
 
+        <div class="tr">
+          <div class="td title"> Request Method </div>
+          <div class="td content">POST</div>
+        </div>
 
-							</div>
-						</div>
+        <div class="tr">
+          <div class="td title"> HTTP Version </div>
+          <div class="td content"></div>
+        </div>
 
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;controller&#x2F;user.js:51:16
-							</div>
-							<div class="frame-row-code">
-								userController.login
-							</div>
-							<div class="frame-context" data-start="46" data-line="51"
-								data-file="app&#x2F;controller&#x2F;user.js" data-method="userController.login"
-								data-extname="js" data-line-column="51:16"> &#x2F;&#x2F; &quot;password&quot;:
-								&quot;12345678&quot;
-								&#x2F;&#x2F; }
-								&#x2F;&#x2F; 校验 &#x60;ctx.request.body&#x60; 是否符合我们预期的格式
-								&#x2F;&#x2F; 如果参数校验未通过，将会抛出一个 status &#x3D; 422 的异常
-								ctx.validate(loginRule, ctx.request.body);
-								ctx.body &#x3D; await ctx.service.user.login(ctx.request.body);
-								&#x2F;&#x2F; try {
-								&#x2F;&#x2F; ctx.validate(loginRule, ctx.request.body);
-								&#x2F;&#x2F; ctx.body &#x3D; await ctx.service.user.login(ctx.request.body);
-								&#x2F;&#x2F; } catch (e) {
-								&#x2F;&#x2F; ctx.body &#x3D; e
-							</div>
-						</div>
+        <div class="tr">
+          <div class="td title"> Connection </div>
+          <div class="td content">keep-alive</div>
+        </div>
+      </div>
 
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;middleware&#x2F;listen.js:4:5
-							</div>
-							<div class="frame-row-code">
+      <h2 class="request-title"> Headers </h2>
+      <div class="table">
+          <div class="tr">
+            <div class="td title">authorization</div>
+            <div class="td content">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEzOCwiZW1haWwiOiJlcnZlZS53YW5nQHllYWhtb2JpLmNvbSIsInVzZXJuYW1lIjoid2FuZ3dlaSIsInNhbHQiOiJhZ2ZIIiwicGFzc3dvcmQiOiI5NmM4NjVjNjAwMGFmMDdiOTk3YzdlYjQ2OTBkZGM3YyIsImdyb3VwX2lkIjoxLCJyZXZlbnVlX3JhdGUiOjEsImltcHJlc3Npb25fcmF0ZSI6MSwiY2xpY2tfcmF0ZSI6MSwic3ViX3VzZXJzIjoiIiwic3RhdHVzIjoxLCJhdXRvX2VjcGMiOjIsInNka19zdWJzIjoyLCJjcmVhdGVfZGF0ZSI6IjIwMjAtMDEtMjFUMTg6NTM6NDEuMDAwWiIsInVwZGF0ZV9kYXRlIjoiMjAyMC0wMS0yMVQxODo1Mzo0MS4wMDBaIiwicmF0ZV9kYXRlIjoiMjAyMC0wMS0yMVQxODo1Mzo0MS4wMDBaIiwiY29tbWVudCI6IiIsImluZGVwZW5kZW50X3JlZyI6MiwiYXV0b19pbml0IjoyLCJpZ25vcmUiOjIsImFjdGl2YXRpb24iOjIsImF1ZGl0X2FjdGl2YXRpb24iOjIsIndha2V1cF9zdGF0dXMiOjIsImlhdCI6MTYwMTM2NjIzNCwiZXhwIjoxNjAxMzY2MjU0fQ.Wwc-7YpAqOryAklF21QkPcnPhyL5Zf7rEQgnybFhykU</div>
+          </div>
+          <div class="tr">
+            <div class="td title">user-agent</div>
+            <div class="td content">PostmanRuntime&#x2F;7.26.2</div>
+          </div>
+          <div class="tr">
+            <div class="td title">accept</div>
+            <div class="td content">*&#x2F;*</div>
+          </div>
+          <div class="tr">
+            <div class="td title">postman-token</div>
+            <div class="td content">062dbc23-d449-4ddf-b97d-637cd71f1620</div>
+          </div>
+          <div class="tr">
+            <div class="td title">host</div>
+            <div class="td content">localhost:7001</div>
+          </div>
+          <div class="tr">
+            <div class="td title">accept-encoding</div>
+            <div class="td content">gzip, deflate, br</div>
+          </div>
+          <div class="tr">
+            <div class="td title">content-length</div>
+            <div class="td content">0</div>
+          </div>
+      </div>
 
-							</div>
-							<div class="frame-context" data-start="1" data-line="4"
-								data-file="app&#x2F;middleware&#x2F;listen.js" data-method="" data-extname="js"
-								data-line-column="4:5">&#39;use strict&#39;;
-								module.exports &#x3D; () &#x3D;&gt; {
-								return async function (ctx, next) {
-								await next();
-								console.log(ctx.request.url)
-								}
-								};
-
-							</div>
-						</div>
-
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;middleware&#x2F;auth.js:20:7
-							</div>
-							<div class="frame-row-code">
-								auth
-							</div>
-							<div class="frame-context" data-start="15" data-line="20"
-								data-file="app&#x2F;middleware&#x2F;auth.js" data-method="auth" data-extname="js"
-								data-line-column="20:7"> const baseUrl &#x3D; ctx.originalUrl.split(&#39;?&#39;)[0]
-								return baseUrl &#x3D;&#x3D;&#x3D; ele
-								})
-								const isType &#x3D; ctx.request.method &#x3D;&#x3D;&#x3D; &#39;GET&#39;
-								if (isWrite) {
-								await next()
-								} else {
-								let token &#x3D; ctx.request.header[&#39;authorization&#39;]
-								if (token &#x3D;&#x3D;&#x3D; undefined) {
-								ctx.body &#x3D; {
-								code: 50000,
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-graphql&#x2F;app&#x2F;middleware&#x2F;graphql.js:74:5
-							</div>
-							<div class="frame-row-code">
-
-							</div>
-							<div class="frame-context" data-start="69" data-line="74"
-								data-file="node_modules&#x2F;egg-graphql&#x2F;app&#x2F;middleware&#x2F;graphql.js"
-								data-method="" data-extname="js" data-line-column="74:5"> context: ctx,
-								}
-								);
-								return graphqlKoa(serverOptions)(ctx);
-								}
-								await next();
-								};
-								};
-
-							</div>
-						</div>
-
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;middleware&#x2F;notfound_handler.js:3:5
-							</div>
-							<div class="frame-row-code">
-								notFoundHandler
-							</div>
-							<div class="frame-context" data-start="1" data-line="3"
-								data-file="app&#x2F;middleware&#x2F;notfound_handler.js" data-method="notFoundHandler"
-								data-extname="js" data-line-column="3:5">module.exports &#x3D; () &#x3D;&gt; {
-								return async function notFoundHandler(ctx, next) {
-								await next();
-								if (ctx.status &#x3D;&#x3D;&#x3D; 404 &amp;&amp; !ctx.body) {
-								if (ctx.acceptJSON) {
-								ctx.body &#x3D; { error: &#39;Not Found&#39; };
-								} else {
-								ctx.body &#x3D; &#39;&lt;h1&gt;Page Not Found&lt;&#x2F;h1&gt;&#39;;
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;koa-compress&#x2F;index.js:38:5
-							</div>
-							<div class="frame-row-code">
-
-							</div>
-							<div class="frame-context" data-start="33" data-line="38"
-								data-file="node_modules&#x2F;koa-compress&#x2F;index.js" data-method=""
-								data-extname="js" data-line-column="38:5"> if (typeof threshold &#x3D;&#x3D;&#x3D;
-								&#39;string&#39;) threshold &#x3D; bytes(threshold)
-
-								return async (ctx, next) &#x3D;&gt; {
-								ctx.vary(&#39;Accept-Encoding&#39;)
-
-								await next()
-
-								let { body } &#x3D; ctx
-								if (!body) return
-								if (ctx.res.headersSent || !ctx.writable) return
-								if (ctx.compress &#x3D;&#x3D;&#x3D; false) return
-							</div>
-						</div>
-
-						<div class="frame-row ">
-							<div class="frame-row-filepath">
-								app&#x2F;middleware&#x2F;robot.js:13:7
-							</div>
-							<div class="frame-row-code">
-								robotMiddleware
-							</div>
-							<div class="frame-context" data-start="8" data-line="13"
-								data-file="app&#x2F;middleware&#x2F;robot.js" data-method="robotMiddleware"
-								data-extname="js" data-line-column="13:7"> const match &#x3D; rule.some(ua &#x3D;&gt;
-								ua.test(source));
-								if (match) {
-								ctx.status &#x3D; 403;
-								ctx.message &#x3D; &#39;Go away, robot.&#39;;
-								} else {
-								await next();
-								}
-								};
-								};
-
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-development&#x2F;app&#x2F;middleware&#x2F;egg_loader_trace.js:9:50
-							</div>
-							<div class="frame-row-code">
-
-							</div>
-							<div class="frame-context" data-start="4" data-line="9"
-								data-file="node_modules&#x2F;egg-development&#x2F;app&#x2F;middleware&#x2F;egg_loader_trace.js"
-								data-method="" data-extname="js" data-line-column="9:50">const fs &#x3D;
-								require(&#39;mz&#x2F;fs&#39;);
-								const utility &#x3D; require(&#39;utility&#39;);
-
-								module.exports &#x3D; (_, app) &#x3D;&gt; {
-								return async (ctx, next) &#x3D;&gt; {
-								if (ctx.path !&#x3D;&#x3D; &#39;&#x2F;__loader_trace__&#39;) return await next();
-								const template &#x3D; await fs.readFile(path.join(__dirname,
-								&#39;..&#x2F;..&#x2F;lib&#x2F;loader_trace.html&#39;), &#39;utf8&#39;);
-								const data &#x3D; await loadTimingData(app);
-								ctx.body &#x3D; template.replace(&#39;{{placeholder}}&#39;, JSON.stringify(data));
-								};
-								};
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;xframe.js:7:5
-							</div>
-							<div class="frame-row-code">
-								xframe
-							</div>
-							<div class="frame-context" data-start="2" data-line="7"
-								data-file="node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;xframe.js"
-								data-method="xframe" data-extname="js" data-line-column="7:5">
-								const utils &#x3D; require(&#39;..&#x2F;utils&#39;);
-
-								module.exports &#x3D; options &#x3D;&gt; {
-								return async function xframe(ctx, next) {
-								await next();
-
-								const opts &#x3D; utils.merge(options, ctx.securityOptions.xframe);
-								if (utils.checkIfIgnore(opts, ctx)) return;
-
-								&#x2F;&#x2F; DENY,SAMEORIGIN,ALLOW-FROM
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;xssProtection.js:7:5
-							</div>
-							<div class="frame-row-code">
-								xssProtection
-							</div>
-							<div class="frame-context" data-start="2" data-line="7"
-								data-file="node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;xssProtection.js"
-								data-method="xssProtection" data-extname="js" data-line-column="7:5">
-								const utils &#x3D; require(&#39;..&#x2F;utils&#39;);
-
-								module.exports &#x3D; options &#x3D;&gt; {
-								return async function xssProtection(ctx, next) {
-								await next();
-
-								const opts &#x3D; utils.merge(options, ctx.securityOptions.xssProtection);
-								if (utils.checkIfIgnore(opts, ctx)) return;
-
-								ctx.set(&#39;x-xss-protection&#39;, opts.value);
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;nosniff.js:8:5
-							</div>
-							<div class="frame-row-code">
-								nosniff
-							</div>
-							<div class="frame-context" data-start="3" data-line="8"
-								data-file="node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;nosniff.js"
-								data-method="nosniff" data-extname="js" data-line-column="8:5">const statuses &#x3D;
-								require(&#39;statuses&#39;);
-								const utils &#x3D; require(&#39;..&#x2F;utils&#39;);
-
-								module.exports &#x3D; options &#x3D;&gt; {
-								return async function nosniff(ctx, next) {
-								await next();
-
-								&#x2F;&#x2F; ignore redirect response
-								if (statuses.redirect[ctx.status]) return;
-
-								const opts &#x3D; utils.merge(options, ctx.securityOptions.nosniff);
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;noopen.js:8:5
-							</div>
-							<div class="frame-row-code">
-								noopen
-							</div>
-							<div class="frame-context" data-start="3" data-line="8"
-								data-file="node_modules&#x2F;egg-security&#x2F;lib&#x2F;middlewares&#x2F;noopen.js"
-								data-method="noopen" data-extname="js" data-line-column="8:5">const utils &#x3D;
-								require(&#39;..&#x2F;utils&#39;);
-
-								&#x2F;&#x2F; @see
-								http:&#x2F;&#x2F;blogs.msdn.com&#x2F;b&#x2F;ieinternals&#x2F;archive&#x2F;2009&#x2F;06&#x2F;30&#x2F;internet-explorer-custom-http-headers.aspx
-								module.exports &#x3D; options &#x3D;&gt; {
-								return async function noopen(ctx, next) {
-								await next();
-
-								const opts &#x3D; utils.merge(options, ctx.securityOptions.noopen);
-								if (utils.checkIfIgnore(opts, ctx)) return;
-
-								ctx.set(&#39;x-download-options&#39;, &#39;noopen&#39;);
-							</div>
-						</div>
-
-						<div class="frame-row native-frame">
-							<div class="frame-row-filepath">
-								node_modules&#x2F;koa-session&#x2F;index.js:41:7
-							</div>
-							<div class="frame-row-code">
-								session
-							</div>
-							<div class="frame-context" data-start="36" data-line="41"
-								data-file="node_modules&#x2F;koa-session&#x2F;index.js" data-method="session"
-								data-extname="js" data-line-column="41:7">
-								return async function session(ctx, next) {
-								const sess &#x3D; ctx[CONTEXT_SESSION];
-								if (sess.store) await sess.initFromExternal();
-								try {
-								await next();
-								} catch (err) {
-								throw err;
-								} finally {
-								if (opts.autoCommit) {
-								await sess.commit();
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="request-details">
-			<h2 class="request-title"> Request Details </h2>
-			<div class="table">
-				<div class="tr">
-					<div class="td title"> URI </div>
-					<div class="td content">&#x2F;login?username&#x3D;123&amp;password&#x3D;456</div>
-				</div>
-
-				<div class="tr">
-					<div class="td title"> Request Method </div>
-					<div class="td content">POST</div>
-				</div>
-
-				<div class="tr">
-					<div class="td title"> HTTP Version </div>
-					<div class="td content"></div>
-				</div>
-
-				<div class="tr">
-					<div class="td title"> Connection </div>
-					<div class="td content">keep-alive</div>
-				</div>
-			</div>
-
-			<h2 class="request-title"> Headers </h2>
-			<div class="table">
-				<div class="tr">
-					<div class="td title">content-type</div>
-					<div class="td content">application&#x2F;json</div>
-				</div>
-				<div class="tr">
-					<div class="td title">user-agent</div>
-					<div class="td content">PostmanRuntime&#x2F;7.26.2</div>
-				</div>
-				<div class="tr">
-					<div class="td title">accept</div>
-					<div class="td content">*&#x2F;*</div>
-				</div>
-				<div class="tr">
-					<div class="td title">postman-token</div>
-					<div class="td content">de2ce9f2-1a04-4141-a30d-f44f18e693dd</div>
-				</div>
-				<div class="tr">
-					<div class="td title">host</div>
-					<div class="td content">localhost:7001</div>
-				</div>
-				<div class="tr">
-					<div class="td title">accept-encoding</div>
-					<div class="td content">gzip, deflate, br</div>
-				</div>
-				<div class="tr">
-					<div class="td title">content-length</div>
-					<div class="td content">69</div>
-				</div>
-			</div>
-
-			<h2 class="request-title"> Cookies </h2>
-			<div class="table">
-				<div class="tr">
-					<div class="td title">locale</div>
-					<div class="td content">zh-cn</div>
-				</div>
-			</div>
-			<h2 class="request-title"> AppInfo </h2>
-			<div class="table">
-				<div class="tr">
-					<div class="td title"> baseDir </div>
-					<div class="td content">&#x2F;Users&#x2F;yeahmobi&#x2F;Desktop&#x2F;www&#x2F;eggServer</div>
-				</div>
-				<div class="tr">
-					<div class="td title"> config </div>
-					<div class="td content code">
-						<pre class="line-numbers"><code class="language-json">{
+      <h2 class="request-title"> Cookies </h2>
+      <div class="table">
+          <div class="tr">
+            <div class="td title">locale</div>
+            <div class="td content">zh-cn</div>
+          </div>
+      </div>
+      <h2 class="request-title"> AppInfo </h2>
+      <div class="table">
+        <div class="tr">
+          <div class="td title"> baseDir </div>
+          <div class="td content">&#x2F;Users&#x2F;yeahmobi&#x2F;Desktop&#x2F;www&#x2F;eggServer</div>
+        </div>
+        <div class="tr">
+          <div class="td title"> config </div>
+          <div class="td content code">
+            <pre class="line-numbers"><code class="language-json">{
   session: {
     maxAge: 86400000,
     key: &#39;EGG_SESS&#39;,
@@ -1451,8 +1437,7 @@
     throwOnUndefined: false,
     trimBlocks: false,
     lstripBlocks: false,
-    noCache: true,
-    dev: false
+    cache: false
   },
   validate: {},
   mysql: {
@@ -1511,8 +1496,8 @@
   jwt: {
     secret: &#39;123456&#39;,
     enable: false,
-    jwtExpire: &#39;1 days&#39;,
-    WhiteList: [ &#39;&#x2F;UserLogin&#39;, &#39;&#x2F;login&#39; ]
+    jwtExpire: &#39;20s&#39;,
+    WhiteList: [ &#39;&#x2F;UserLogin&#39;, &#39;&#x2F;login&#39;, &#39;&#x2F;site&#x2F;login&#39; ]
   },
   env: &#39;local&#39;,
   name: &#39;eggServer&#39;,
@@ -1747,13 +1732,13 @@
     checkFile: [Function: checkFile]
   }
 }</code></pre>
-					</div>
-				</div>
-				</<div>
-		</section>
+          </div>
+        </div>
+      </<div>
+    </section>
 
-		<script type="text/javascript">
-			var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var i=r[e];if(2==arguments.length){a=arguments[1];for(var l in a)a.hasOwnProperty(l)&&(i[l]=a[l]);return i}var o={};for(var s in i)if(i.hasOwnProperty(s)){if(s==t)for(var l in a)a.hasOwnProperty(l)&&(o[l]=a[l]);o[s]=i[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var i in e)e.hasOwnProperty(i)&&(t.call(e,i,e[i],a||i),"Object"!==n.util.type(e[i])||r[n.util.objId(e[i])]?"Array"!==n.util.type(e[i])||r[n.util.objId(e[i])]||(r[n.util.objId(e[i])]=!0,n.languages.DFS(e[i],t,i,r)):(r[n.util.objId(e[i])]=!0,n.languages.DFS(e[i],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,i=a.elements||document.querySelectorAll(a.selector),l=0;r=i[l++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var i,l,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(i=(o.className.match(e)||[,""])[1].toLowerCase(),l=n.languages[i]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+i,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+i);var s=t.textContent,u={element:t,language:i,grammar:l,code:s};if(n.hooks.run("before-sanity-check",u),!u.code||!u.grammar)return u.code&&(u.element.textContent=u.code),n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var g=new Worker(n.filename);g.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},g.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var i=n.tokenize(e,t);return a.stringify(n.util.encode(i),r)},tokenize:function(e,t){var a=n.Token,r=[e],i=t.rest;if(i){for(var l in i)t[l]=i[l];delete t.rest}e:for(var l in t)if(t.hasOwnProperty(l)&&t[l]){var o=t[l];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],g=u.inside,c=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;if(h&&!u.pattern.global){var p=u.pattern.toString().match(/[imuy]*$/)[0];u.pattern=RegExp(u.pattern.source,p+"g")}u=u.pattern||u;for(var m=0,y=0;m<r.length;y+=r[m].length,++m){var v=r[m];if(r.length>e.length)break e;if(!(v instanceof a)){u.lastIndex=0;var b=u.exec(v),k=1;if(!b&&h&&m!=r.length-1){if(u.lastIndex=y,b=u.exec(e),!b)break;for(var w=b.index+(c?b[1].length:0),_=b.index+b[0].length,A=m,P=y,j=r.length;j>A&&_>P;++A)P+=r[A].length,w>=P&&(++m,y=P);if(r[m]instanceof a||r[A-1].greedy)continue;k=A-m,v=e.slice(y,P),b.index-=y}if(b){c&&(f=b[1].length);var w=b.index+f,b=b[0].slice(f),_=w+b.length,x=v.slice(0,w),O=v.slice(_),S=[m,k];x&&S.push(x);var N=new a(l,g?n.tokenize(b,g):b,d,b,h);S.push(N),O&&S.push(O),Array.prototype.splice.apply(r,S)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,i=0;r=a[i++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.length=0|(a||"").length,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var i={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==i.type&&(i.attributes.spellcheck="true"),e.alias){var l="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(i.classes,l)}n.hooks.run("wrap",i);var o=Object.keys(i.attributes).map(function(e){return e+'="'+(i.attributes[e]||"").replace(/"/g,"&quot;")+'"'}).join(" ");return"<"+i.tag+' class="'+i.classes.join(" ")+'"'+(o?" "+o:"")+">"+i.content+"</"+i.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,i=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),i&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&("loading"!==document.readyState?window.requestAnimationFrame?window.requestAnimationFrame(n.highlightAll):window.setTimeout(n.highlightAll,16):document.addEventListener("DOMContentLoaded",n.highlightAll))),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+    <script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var i=r[e];if(2==arguments.length){a=arguments[1];for(var l in a)a.hasOwnProperty(l)&&(i[l]=a[l]);return i}var o={};for(var s in i)if(i.hasOwnProperty(s)){if(s==t)for(var l in a)a.hasOwnProperty(l)&&(o[l]=a[l]);o[s]=i[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var i in e)e.hasOwnProperty(i)&&(t.call(e,i,e[i],a||i),"Object"!==n.util.type(e[i])||r[n.util.objId(e[i])]?"Array"!==n.util.type(e[i])||r[n.util.objId(e[i])]||(r[n.util.objId(e[i])]=!0,n.languages.DFS(e[i],t,i,r)):(r[n.util.objId(e[i])]=!0,n.languages.DFS(e[i],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,i=a.elements||document.querySelectorAll(a.selector),l=0;r=i[l++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var i,l,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(i=(o.className.match(e)||[,""])[1].toLowerCase(),l=n.languages[i]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+i,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+i);var s=t.textContent,u={element:t,language:i,grammar:l,code:s};if(n.hooks.run("before-sanity-check",u),!u.code||!u.grammar)return u.code&&(u.element.textContent=u.code),n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var g=new Worker(n.filename);g.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},g.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var i=n.tokenize(e,t);return a.stringify(n.util.encode(i),r)},tokenize:function(e,t){var a=n.Token,r=[e],i=t.rest;if(i){for(var l in i)t[l]=i[l];delete t.rest}e:for(var l in t)if(t.hasOwnProperty(l)&&t[l]){var o=t[l];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],g=u.inside,c=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;if(h&&!u.pattern.global){var p=u.pattern.toString().match(/[imuy]*$/)[0];u.pattern=RegExp(u.pattern.source,p+"g")}u=u.pattern||u;for(var m=0,y=0;m<r.length;y+=r[m].length,++m){var v=r[m];if(r.length>e.length)break e;if(!(v instanceof a)){u.lastIndex=0;var b=u.exec(v),k=1;if(!b&&h&&m!=r.length-1){if(u.lastIndex=y,b=u.exec(e),!b)break;for(var w=b.index+(c?b[1].length:0),_=b.index+b[0].length,A=m,P=y,j=r.length;j>A&&_>P;++A)P+=r[A].length,w>=P&&(++m,y=P);if(r[m]instanceof a||r[A-1].greedy)continue;k=A-m,v=e.slice(y,P),b.index-=y}if(b){c&&(f=b[1].length);var w=b.index+f,b=b[0].slice(f),_=w+b.length,x=v.slice(0,w),O=v.slice(_),S=[m,k];x&&S.push(x);var N=new a(l,g?n.tokenize(b,g):b,d,b,h);S.push(N),O&&S.push(O),Array.prototype.splice.apply(r,S)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,i=0;r=a[i++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.length=0|(a||"").length,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var i={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==i.type&&(i.attributes.spellcheck="true"),e.alias){var l="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(i.classes,l)}n.hooks.run("wrap",i);var o=Object.keys(i.attributes).map(function(e){return e+'="'+(i.attributes[e]||"").replace(/"/g,"&quot;")+'"'}).join(" ");return"<"+i.tag+' class="'+i.classes.join(" ")+'"'+(o?" "+o:"")+">"+i.content+"</"+i.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,i=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),i&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&("loading"!==document.readyState?window.requestAnimationFrame?window.requestAnimationFrame(n.highlightAll):window.setTimeout(n.highlightAll,16):document.addEventListener("DOMContentLoaded",n.highlightAll))),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
 Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/i,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
 Prism.languages.css={comment:/\/\*[\w\W]*?\*\//,atrule:{pattern:/@[\w-]+?.*?(;|(?=\s*\{))/i,inside:{rule:/@[\w-]+/}},url:/url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,selector:/[^\{\}\s][^\{\};]*?(?=\s*\{)/,string:{pattern:/("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,greedy:!0},property:/(\b|\B)[\w-]+(?=\s*:)/i,important:/\B!important\b/i,"function":/[-a-z0-9]+(?=\()/i,punctuation:/[(){};:]/},Prism.languages.css.atrule.inside.rest=Prism.util.clone(Prism.languages.css),Prism.languages.markup&&(Prism.languages.insertBefore("markup","tag",{style:{pattern:/(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,lookbehind:!0,inside:Prism.languages.css,alias:"language-css"}}),Prism.languages.insertBefore("inside","attr-value",{"style-attr":{pattern:/\s*style=("|').*?\1/i,inside:{"attr-name":{pattern:/^\s*style/i,inside:Prism.languages.markup.tag.inside},punctuation:/^\s*=\s*['"]|['"]\s*$/,"attr-value":{pattern:/.+/i,inside:Prism.languages.css}},alias:"language-css"}},Prism.languages.markup.tag));
 Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
@@ -1762,9 +1747,9 @@ Prism.languages.json={property:/"(?:\\.|[^\\"])*"(?=\s*:)/gi,string:/"(?!:)(?:\\
 Prism.languages.typescript=Prism.languages.extend("javascript",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield|false|true|module|declare|constructor|string|Function|any|number|boolean|Array|enum|symbol|namespace|abstract|require|type)\b/}),Prism.languages.ts=Prism.languages.typescript;
 !function(){function e(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))}function t(e,t){return t=" "+t+" ",(" "+e.className+" ").replace(/[\n\t]/g," ").indexOf(t)>-1}function n(e,n,i){for(var o,a=n.replace(/\s+/g,"").split(","),l=+e.getAttribute("data-line-offset")||0,d=r()?parseInt:parseFloat,c=d(getComputedStyle(e).lineHeight),s=0;o=a[s++];){o=o.split("-");var u=+o[0],m=+o[1]||u,h=document.createElement("div");h.textContent=Array(m-u+2).join(" \n"),h.setAttribute("aria-hidden","true"),h.className=(i||"")+" line-highlight",t(e,"line-numbers")||(h.setAttribute("data-start",u),m>u&&h.setAttribute("data-end",m)),h.style.top=(u-l-1)*c+"px",t(e,"line-numbers")?e.appendChild(h):(e.querySelector("code")||e).appendChild(h)}}function i(){var t=location.hash.slice(1);e(".temporary.line-highlight").forEach(function(e){e.parentNode.removeChild(e)});var i=(t.match(/\.([\d,-]+)$/)||[,""])[1];if(i&&!document.getElementById(t)){var r=t.slice(0,t.lastIndexOf(".")),o=document.getElementById(r);o&&(o.hasAttribute("data-line")||o.setAttribute("data-line",""),n(o,i,"temporary "),document.querySelector(".temporary.line-highlight").scrollIntoView())}}if("undefined"!=typeof self&&self.Prism&&self.document&&document.querySelector){var r=function(){var e;return function(){if("undefined"==typeof e){var t=document.createElement("div");t.style.fontSize="13px",t.style.lineHeight="1.5",t.style.padding=0,t.style.border=0,t.innerHTML="&nbsp;<br />&nbsp;",document.body.appendChild(t),e=38===t.offsetHeight,document.body.removeChild(t)}return e}}(),o=0;Prism.hooks.add("complete",function(t){var r=t.element.parentNode,a=r&&r.getAttribute("data-line");r&&a&&/pre/i.test(r.nodeName)&&(clearTimeout(o),e(".line-highlight",r).forEach(function(e){e.parentNode.removeChild(e)}),n(r,a),o=setTimeout(i,1))}),window.addEventListener&&window.addEventListener("hashchange",i)}}();
 !function(){"undefined"!=typeof self&&self.Prism&&self.document&&Prism.hooks.add("complete",function(e){if(e.code){var t=e.element.parentNode,s=/\s*\bline-numbers\b\s*/;if(t&&/pre/i.test(t.nodeName)&&(s.test(t.className)||s.test(e.element.className))&&!e.element.querySelector(".line-numbers-rows")){s.test(e.element.className)&&(e.element.className=e.element.className.replace(s,"")),s.test(t.className)||(t.className+=" line-numbers");var n,a=e.code.match(/\n(?!$)/g),l=a?a.length+1:1,r=new Array(l+1);r=r.join("<span></span>"),n=document.createElement("span"),n.setAttribute("aria-hidden","true"),n.className="line-numbers-rows",n.innerHTML=r,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(n)}}})}();
-		</script>
-		<script>
-			(function() {
+    </script>
+    <script>
+      (function() {
         const $ = function(value) { return document.querySelector(value) };
         const $$ = function(value) { return document.querySelectorAll(value) };
         var nativeFramesLength = $$('.frame-row.native-frame').length;
@@ -1821,8 +1806,7 @@ Prism.languages.typescript=Prism.languages.extend("javascript",{keyword:/\b(as|a
         displayFirstView();
         showFrameContext($('.frame-row.active'));
       })();
-		</script>
-	</section>
+    </script>
+  </section>
 </body>
-
 </html>

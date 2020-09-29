@@ -18,7 +18,7 @@ class TokenService extends Service {
     const token = app.jwt.sign({
       ...options
     }, app.config.jwt.secret, {
-      expiresIn: '30s'
+      expiresIn: app.config.jwt.jwtExpire
     });
     return token
   }

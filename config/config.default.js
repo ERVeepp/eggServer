@@ -261,7 +261,7 @@ module.exports = appInfo => {
   config.jwt = {
     secret: '123456',
     // jwtSecret: 'shared-secret',
-    jwtExpire: '1 days',
+    jwtExpire: '20s',
     WhiteList: ['/UserLogin', '/login', '/site/login']
   }
 
