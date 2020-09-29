@@ -1,0 +1,128 @@
+
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta https-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport"
+                    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                <link rel="stylesheet" href="./lib/common/extend_g.css">
+                <title></title>
+                <!-- <script src="../../../public/lib/common/runtime_g.js"></script> -->
+                <script>
+                    var docEl = document.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth || 375;
+                        clientWidth > 750 ? clientWidth = 750 : clientWidth = clientWidth;
+                        if (clientWidth){
+                            const fz = docEl.style.fontSize = 20 * (clientWidth / 375);
+                            docEl.style.fontSize = 20 * (clientWidth / 375) + 'px';
+                            window.remscale = clientWidth / 375;
+                            var realfz = ~~(+window.getComputedStyle(document.getElementsByTagName("html")[0]).fontSize.replace('px','')*10000)/10000
+                            if (fz !== realfz) {
+                                document.getElementsByTagName("html")[0].style.cssText = 'font-size: ' + fz * (fz / realfz) +"px";
+                            }
+                        }
+                    };
+                    if (document.addEventListener){
+                        window.addEventListener(resizeEvt, recalc, false);
+                        document.addEventListener('DOMContentLoaded', recalc, false);
+                    }
+                </script>
+            <link href="bundle.2020.9.14.10.1.css?14bea8ff4c02a891e017" rel="stylesheet"></head>
+            <body>
+    
+<div id="TV013" statis-name='Toke_root' version="TV013H" data-config="TV013H" page-id='index'>
+    <div class="T106_main">
+        <div class="T106_banner">
+            <div class="rule"></div>
+            <!-- <div class="prize"></div> -->
+        </div>
+        <div class="withdraw_wrap">
+			<p class="withdrawal_text">每到达80元可提现</p>
+            <div class="progress">
+                <div class="color_progress"></div>
+            </div>
+            <div class="red_packet">0</div>
+            <div class="withdraw_button"></div>
+        </div>
+        <div class="grid_wrap">
+            <div class="grid_start"></div>
+            <div class="human_wrap">
+                <div class="human"></div>
+                <div class="human_shadow"></div>
+                <div class="human_bright"></div>
+            </div>
+            <div class="red_packet10">
+                <div class="packet10">0.8</div>
+                <div class="gold"></div>
+			</div>
+			<!-- 福袋 -->
+            <div class="bag">
+				<div class="bag_bg"></div>
+                <div class="gold"></div>
+			</div>
+			<!-- 财神 -->
+            <div class="box">
+				<div class="box_bg"></div>
+				<div class="gold"></div>
+			</div>
+            <!-- <div class="bomb"></div> -->
+            <div class="red_packet20">
+                <div class="packet20">1.2</div>
+                <div class="gold"></div>
+            </div>
+            <div class="plate">
+				<div class="plate_bg"></div>
+				<div class="gold"></div>
+			</div>
+            <!-- <div class="gift"></div> -->
+            <div class="chest"></div>
+            <div class="begin">
+                <div class="arrow"></div>
+                <div class="dice"></div>
+                <div class="hand"></div>
+            </div>
+            <div class="playtime">今日剩余:3次</div>
+        </div>
+        <div class="pos">
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid" id="red_packet_wheel">
+                <div class="gold"></div>
+            </div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+            <div class="grid"></div>
+        </div>
+    </div>
+</div>
+<!-- <script src="https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js"></script>
+<script>
+    var vConsole = new VConsole();
+    console.log('hello world')
+</script>     -->
+
+        <script src="./lib/polyfill/polyfill.min.js"></script>
+        <script src="./lib/zepto/zepto.js"></script>
+        <script src="./lib/statis/Statis_IA_g.js"></script>
+        <script src="./lib/common/common_g.js"></script>
+        <script type="text/javascript" src="js/bundle.2020.9.14.10.1.js?14bea8ff4c02a891e017"></script>
+    </body>
+</html>
+    

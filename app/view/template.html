@@ -1,0 +1,10 @@
+<!doctype html>
+<html>
+  <head>
+    {{ helper.assets.getStyle() | safe }}
+  </head>
+  <body>
+    <div id="root" class='test'></div>
+    {{ helper.assets.getScript() | safe }}
+  </body>
+</html>

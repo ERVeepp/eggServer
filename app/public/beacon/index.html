@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="btn">click me</div>
+  <script>
+    let btn = document.querySelector('.btn')
+    btn.addEventListener('click', function () {
+      console.log('打开微信')
+      location.href = 'weixin://dl/add'
+      // 把当前微信号复制到系统粘贴板
+    })
+  </script>
+</body>
+</html>

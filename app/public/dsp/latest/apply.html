@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        YeahDSP
+    </title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        .form-horizontal {
+            padding: 24px;
+        }
+        
+        h1 {
+            font-size: 24px;
+        }
+        
+        h3 {
+            font-size: 16px;
+        }
+        
+        .photo-loading {
+            position: relative;
+        }
+        
+        .photo .spinner {
+            display: none;
+        }
+        
+        .photo textarea {
+            height: 108px;
+        }
+        
+        .photo-loading .spinner {
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 55px;
+            height: 55px;
+            overflow: visible;
+            display: block
+        }
+        
+        .photo-loading::after {
+            z-index: 10;
+            content: ' ';
+            background: rgba(0, 0, 0, .2);
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script type="text/javascript" src="./js/vendors.js?0583083a672ad743aad1"></script>
+<script type="text/javascript" src="./js/applyWithContract.bundle.js?0583083a672ad743aad1"></script>
+
+</html>

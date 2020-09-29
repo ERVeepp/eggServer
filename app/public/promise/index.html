@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    console.log('start!')
+    let arr = [
+      {
+        name: 'a',
+        value: 'a'
+      },
+      {
+        name: 'b',
+        value: 'b'
+      },
+      {
+        name: 'c',
+        value: 'c'
+      },
+    ]
+    let baseTime = 1500
+    let promises = arr.map(async (ele, index) => {
+      let result = await new Promise((resolve, reject) => {
+        setTimeout(_ => {
+          ele.id = index
+          resolve(ele)
+        }, baseTime * index)
+      })
+      return result
+    })
+    Promise.all(promises).then((data) => {
+      console.log(data)
+    })
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

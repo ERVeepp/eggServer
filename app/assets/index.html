@@ -1,0 +1,10 @@
+<!doctype html>
+<html>
+  <head>
+    {{ helper.assets.getStyle('umi.css') | safe }}
+  </head>
+  <body>
+    <div id="root" class='test'></div>
+    {{ helper.assets.getScript('umi.js') | safe }}
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>应付</title>
+  <!-- 引入vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- 引入数据 -->
+  <script type="text/javascript" src="./data.js"></script>
+</head>
+<body>
+  <div class='app'>
+    <template>
+      <el-table 
+      :data="tableData.data" 
+      border
+      style="width: 100%">
+        <template v-for='item in tableData.title'>
+          <el-table-column 
+          :prop='item' 
+          :label='item'
+          sortable
+          >
+          </el-table-column>
+        </template>
+      </el-table>
+    </template>
+  </div>
+</body>
+</html>
+<script>
+  let vm = new Vue({
+    el: '.app',
+    data: {
+      tableData: globalThis.tableData['sheet0']
+    }
+
+  })
+</script>

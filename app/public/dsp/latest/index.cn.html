@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<head>
+    <script src="pre.js?0583083a672ad743aad1"></script>
+    <title>YeahDSP - 投放系统</title>
+    <link rel="shortcut icon" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="./lib/style.min.css"> 
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="ROOT"></div>
+    <script>
+    ;(function() {
+        var ms_ie = false;
+        var ua = window.navigator.userAgent;
+        var old_ie = ua.indexOf('MSIE ');
+        var new_ie = ua.indexOf('Trident/');
+            
+        if ((old_ie > -1) || (new_ie > -1)) {
+            ms_ie = true;
+        }
+            
+        if ( ms_ie ) {
+            document.documentElement.className += " ie";
+            // appendScript('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
+            // appendScript('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js')
+            appendScript('//cdn.bootcss.com/html5shiv/r29/html5.min.js')
+            appendScript('//cdn.bootcss.com/es5-shim/4.5.9/es5-shim.min.js')
+            appendScript('//cdn.bootcss.com/es5-shim/4.5.9/es5-sham.min.js')
+            appendScript('//cdn.bootcss.com/json3/3.3.2/json3.min.js')
+            appendScript('//cdn.bootcss.com/es6-shim/0.35.1/es6-shim.min.js')
+            appendScript('//cdn.bootcss.com/es6-shim/0.35.1/es6-sham.min.js')
+            appendScript('http://s3.amazonaws.com/es6-promises/promise-0.1.1.min.js')
+        } else if(!Object.assign) {
+            //低版本chrome不支持Object.assign
+            appendScript('//cdn.bootcss.com/es6-shim/0.35.1/es6-shim.min.js')
+        }
+        
+
+
+        appendScript('//cdn.bootcss.com/moment.js/2.14.0/moment-with-locales.min.js')
+        appendScript('https://cdn.bootcss.com/moment-timezone/0.5.13/moment-timezone.min.js')
+
+        appendScript('http://cdn.greatssp.com/dist/1.5.0.7/lib/script.min.js')
+        appendScript('//cdn.bootcss.com/select2/4.0.3/js/select2.full.min.js')
+    })()
+        
+    </script>
+    <script>
+        log = console.log
+        console.log = function(){}
+        var minify = require('html-minifier').minify
+    </script>
+    <script type="text/javascript" src=".http://cdn.greatssp.com/dist/1.5.0.7/js/vendors.js?0583083a672ad743aad1"></script>
+    <script type="text/javascript" src="http://cdn.greatssp.com/dist/1.5.0.7/js/main.bundle.js?0583083a672ad743aad1"></script>
+</body>
+</html>

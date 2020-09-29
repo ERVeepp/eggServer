@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="circular">
+    <svg viewBox="0 0 100 100">
+      <path d="M10 80 Q 95 10 180 80" stroke="black" fill="transparent" id="circle" />
+      <text>
+        <textPath xlink:href="#circle">Congratulations!</textPath>
+      </text>
+    </svg>
+  </div>
+</body>
+</html>
+<style>
+  .circular{
+    width: 100px;
+    height: 200px;
+    margin: 100px auto;
+    border: 1px solid red;
+  }
+  /* .circular path { fill: none; } */
+  .circular svg{
+    display: block;
+    overflow: visible;
+  }
+</style>

@@ -1,0 +1,8 @@
+type Mutation {
+
+  # User
+  # 删除用户
+  removeUser (
+    # 用户ID
+    id: ID!): User
+}

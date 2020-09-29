@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>a</title>
+</head>
+<body>
+  <!-- <iframe id='biframe' src="./b.html" frameborder="0" name='biframe'></iframe> -->
+  <iframe id='biframe' src="http://192.168.1.107:8080/" frameborder="0" name='biframe'></iframe>
+</body>
+  <script>
+    function addFrameScript(){
+      console.log(window.frames['biframe'])
+      var frmDoc= window.frames['biframe'].document;
+      console.log(frmDoc)
+      var script = frmDoc.createElement('script');
+      script.src = './test.js'
+      console.log(frmDoc.body)
+      frmDoc.body.innerHTML = '123'
+      frmDoc.body.appendChild(script);
+    }
+    let biframe = document.querySelector('#biframe')
+    biframe.onload = () => {
+      addFrameScript()
+    }
+  </script>
+  <style>
+    .biframe{
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>wwww</title>
+  <script>
+    function pageHiddenHandler() {
+      let isHidden = document.hidden
+      console.log(isHidden)
+      // 改变页面title用户观察状态
+      let msg = isHidden ? 'hidden' : 'show'
+      document.title = msg
+      fetch(`/wwtest/page/${msg}`)
+    }
+    pageHiddenHandler()
+    document.addEventListener('visibilitychange', pageHiddenHandler, false)
+    let getwh = () => {
+      viewWidth = window.document.body.clientWidth
+      viewHeight = window.document.body.clientHeight
+      fetch(`/wwtest/view/?w=${viewWidth}&h=${viewHeight}`)
+    }
+    window.onload = () => {
+      getwh()
+    }
+    setInterval(_ => {
+      getwh()
+    }, 3000)
+  </script>
+</head>
+<body>
+  <h1>hello 田文诗 ！</h1>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hidden</title>
+  
+</head>
+<body>
+  <!-- <iframe src='https://fir.im/1h54' class='ad'></iframe> -->
+</body>
+</html>
+<script>
+  //startSimulation 和 pauseSimulation 在其他地方定义
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      console.log(1)
+    } else {
+      console.log(2)
+    }
+  }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange, false)
+  document.addEventListener('DOMContentLoaded', function () {
+    alert('DOMContentLoaded')
+    location.href = 'https://www.baidu.com/'
+  })
+  // window.onload = function () {
+  //   alert('onload')
+  //   location.href = 'https://www.baidu.com/'
+  // }
+</script>
+<style>
+  .ad{
+    display: none;
+  }
+</style>

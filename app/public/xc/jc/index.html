@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  test
+  <script src="openinstall.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      var data = OpenInstall.parseUrlParams();
+      var ua = navigator.userAgent;
+      var os = ua.indexOf("Android") > -1 ? "Android" : (ua.indexOf("iPhone") > -1 || ua.indexOf("iPad") > -1 ? "iOS" : "PC");
+      var key = "yy7sle";
+      if (os == "iOS") {
+        key = "yy7sle";//bvpylc
+      }
+      new OpenInstall({
+        appKey: key,
+        onready: function () {
+          var m = this;
+          m.wakeupOrInstall();
+          return false;
+        }
+      }, data);
+    })
+  </script>
+</body>
+</html>

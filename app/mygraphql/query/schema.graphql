@@ -1,0 +1,11 @@
+type Query {
+  # 用户登录
+  user(
+    # 用户名
+    username: String!,
+    # 密码
+    password: String!
+    ): User
+  # 用户列表
+  users: [User!]
+}

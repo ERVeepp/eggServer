@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <script src="mraid.js"></script> -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const handleData = (baseData) => {
+      let data = null
+      if (baseData.err_no === 0) {
+        data = baseData.ad_list[0].pagead_obj.html_tag
+      }
+      return data
+    }
+    // ajax
+    // http://www.nginxserveregg.com/mopub/api  
+    axios.get('http://api.adthor.com/api/v3/pagead/get?creativetype=img,html&adtype=16&lang=zh-Hans-CN&ad_w=300&pn=com.gmedal.goldgmedel&icc=CN&sv=4.2.3&msv=4.2.3&nt=3&adnum=1&osv=11.3&isdebug=0&os=iOS&request_origin=sdk&dml=iPhone10,3&token=99397457&ds=0&screen_h=812&screen_w=375&dt=phone&ad_h=250&idfa=CF26F393-5097-4D29-A756-CC9D575FD396')
+    // axios.get('http://54.169.152.119:20001/api/v3/pagead/get?creativetype=img,html&adtype=16&lang=zh-Hans-CN&ad_w=300&pn=com.gmedal.goldgmedel&icc=CN&sv=4.2.3&msv=4.2.3&nt=3&adnum=1&osv=11.3&isdebug=0&os=iOS&request_origin=sdk&dml=iPhone10,3&token=99397457&ds=0&screen_h=812&screen_w=375&dt=phone&ad_h=250&idfa=CF26F393-5097-4D29-A756-CC9D575FD396')
+    // axios.get('http://www.nginxserveregg.com/mopub/api')
+    .then(function (response) {
+        console.log(response);
+        // 解析json
+        let data = handleData(response.data)
+        console.log(data)
+        if (data) {
+          // 渲染
+          const body = document.querySelector('body')
+          const appDocker = document.createDocumentFragment()
+          const box = document.createElement('div')
+          box.setAttribute('class', 'appDockers')
+          box.style.cssText = `
+            width: 100%;
+            height: 100%;
+          `
+          box.innerHTML = data
+          appDocker.appendChild(box)
+          body.appendChild(appDocker)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  </script>
+</body>
+</html>

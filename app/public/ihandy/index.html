@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>vueclidemo</title>
+    <script src="../mraid/mopub.mraid.js"></script>
+    <link href=http://static.cloudmobi.net/testpageadmopub/js/chunk-vendors.js rel=preload as=script>
+    <link href=http://static.cloudmobi.net/testpageadmopub/js/app.js rel=preload as=script>
+    <script>
+      window.platform = (function getPlatform() {
+        var ua = navigator.userAgent
+        // return 'web'
+        if (ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1) {
+          return 'Android'
+        }
+        if (ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+          return 'iOS'
+        }
+        return 'web'
+      })()
+      // var creatScript = function (url) {
+      //   var sc = document.createElement('script');
+      //   sc.src = url;
+      //   var s = document.getElementsByTagName('script')[0];
+      //   s.parentNode.insertBefore(sc, s);
+      // }
+      // // 判断平台，添加不同的mraid.js
+      // const ip = ''
+      // if (platform === 'Android') {
+      //   creatScript(ip + '/mraid/tu.mraid.js')
+      // } else if (platform === 'iOS') {
+      //   creatScript(ip + '/mraid/MASTMRAIDController.js')
+      // } else if (platform === 'web') {
+      //   // 此处需要修改
+      //   creatScript(ip + '/mraid/mopub.mraid.js')
+      // }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but vueclidemo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+      window.baseH = {
+        LineItemID: '999ea232f88b4fc48c8b757d9648f086',
+        AdUnitID: '9610ab672b8c45b38ab13e6c7b3e4696',
+        AdUnitFormat: 'Fullscreen',
+        // AdUnitFormat: 'Medium%20Rectangle',
+        // AdUnitFormat: 'Banner',
+        BundleID: '1044535426',
+        CacheBuster: '1571105770709',
+        ClickURLEscaped: 'https%3A%2F%2Fads.mopub.com%2Fm%2Faclk%3Fappid%3D%26cid%3D7e6ee9caf12947b3b364f6d2abb1ceb5%26city%3DBeijing%26ckv%3D2%26country_code%3DCN%26cppck%3DA738D%26current_consent_status%3Dunknown%26dev%3DiPhone11%252C6%26exclude_adgroups%3D999ea232f88b4fc48c8b757d9648f086%26gdpr_applies%3D0%26id%3D485fedde6cae4631b3d9862af6768e7a%26is_mraid%3D1%26os%3DiOS%26osv%3D13.1.1%26priority%3D0%26req%3D45e5b95214b740c4b5e494b155d47d40_0084b4d900a31dc9%26reqt%3D1571105770.0%26rev%3D0%26udid%3Difa%253A693A2420-7125-48BD-B42A-D94AB796C8BD%26video_type%3D%26r%3D',
+        ClickURLUnescaped: 'https://ads.mopub.com/m/aclk?appid=&cid=7e6ee9caf12947b3b364f6d2abb1ceb5&city=Beijing&ckv=2&country_code=CN&cppck=A738D&current_consent_status=unknown&dev=iPhone11%2C6&exclude_adgroups=999ea232f88b4fc48c8b757d9648f086&gdpr_applies=0&id=485fedde6cae4631b3d9862af6768e7a&is_mraid=1&os=iOS&osv=13.1.1&priority=0&req=45e5b95214b740c4b5e494b155d47d40_0084b4d900a31dc9&reqt=1571105770.0&rev=0&udid=ifa%3A693A2420-7125-48BD-B42A-D94AB796C8BD&video_type=&r=',
+        CreativeID: '7e6ee9caf12947b3b364f6d2abb1ceb5',
+        CreativeType: 'mraid',
+        DestinationURLDoubleEscaped: '',
+        DestinationURLEscaped: '',
+        DestinationURLUnescaped: '',
+        DeviceID: '693A2420-7125-48BD-B42A-D94AB796C8BD',
+        DoNotTrack: '0',
+        IPAddress: '172.31.1.51',
+        Keywords: '',
+        Keywordsspecifickey: '',
+        Latitude: '',
+        Longitude: '',
+        PlacementID: '547a68da7ed84dde8670076eae4369af',
+        RequestID: '45e5b95214b740c4b5e494b155d47d40_0084b4d900a31dc9',
+        UserAgent: 'Mozilla%2F5.0%20%28Linux%3B%20Android%209%3B%20Mi%20Note%203%20Build%2FPKQ1.181007.001%3B%20wv%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Version%2F4.0%20Chrome%2F78.0.3904.62%20Mobile%20Safari%2F537.36'
+      }
+      // window.baseH = {
+      //   LineItemID: '%%ADGROUPID%%',
+      //   AdUnitID: '%%ADUNITID%%',
+      //   AdUnitFormat: '%%ADUNIT_FORMAT_ESC%%',
+      //   BundleID: '%%BUNDLE%%',
+      //   CacheBuster: '%%CACHEBUSTER%%',
+      //   ClickURLEscaped: '%%CLICK_URL_ESC%%',
+      //   ClickURLUnescaped: '%%CLICK_URL_UNESC%%',
+      //   CreativeID: '%%CREATIVEID%%',
+      //   CreativeType: '%%CREATIVE_TYPE_ESC%%',
+      //   DestinationURLDoubleEscaped: '%%DEST_URL_ESC_ESC%%',
+      //   DestinationURLEscaped: '%%DEST_URL_ESC%%',
+      //   DestinationURLUnescaped: '%%DEST_URL%%',
+      //   DeviceID: '%eudid!',
+      //   DoNotTrack: '%%DNT%%',
+      //   IPAddress: '%%IPADDRESS%%',
+      //   Keywords: '%%KEYWORDS%%',
+      //   Keywordsspecifickey: '%%KEYWORD:[key]%%',
+      //   Latitude: '%%LATITUDE%%',
+      //   Longitude: '%%LONGITUDE%%',
+      //   PlacementID: '%%PLACEMENTID%%',
+      //   RequestID: '%%REQUESTID%%',
+      //   UserAgent: '%%USERAGENT%%'
+      // }
+      function readycheck() {
+        if (window.mraid.getVersion().indexOf('2') !== -1) {
+          // mraid2.0
+          window.mraidbridge.fireChangeEvent({
+            state: 'loading'
+          })
+          window.mraidbridge.fireChangeEvent({
+            state: 'default'
+          })
+          window.mraidbridge.notifyReadyEvent()
+          var sizeChangeFun = function () {
+            console.log('sizeChangeFun')
+            var w = document.body.clientWidth
+            var h = document.body.clientHeight
+            window.mraidbridge.notifySizeChangeEvent(w, h)
+            // window.mraidbridge.fireChangeEvent({
+            //   sizeChange: {
+            //     width: w,
+            //     height: h
+            //   }
+            // })
+            // window.mraidbridge.notifyViewableChangeEvent()
+            // window.mraidbridge.fireChangeEvent({
+            //   viewable: true
+            // })
+          }
+          window.onresize = function () {
+            sizeChangeFun()
+          }
+          sizeChangeFun()
+        }
+        if (window.mraid.getVersion().indexOf('3') !== -1) {
+          // mraid3.0
+          var sizeChangeFun = function () {
+            console.log('屏幕尺寸发生变化')
+            var w = document.body.clientWidth
+            var h = document.body.clientHeight
+            window.mraid.setScreenSize({
+              width: w,
+              height: h
+            })
+          }
+          sizeChangeFun()
+          // window.mraid.setSupports('vpaid', true)
+          window.mraid.fireChangeEvent('stateChange', 'default')
+          window.mraid.fireEvent('ready')
+          window.mraid.setExposureChange({
+            exposedPercentage: 100,
+            visibleRectangle: {
+              occlusionRectangle: 1
+            }
+          })
+          // window.mraid.setAudioVolumeChange(100)
+          // window.onresize = function () {
+          //   sizeChangeFun()
+          //   window.mraid.fireChangeEvent('sizeChange')
+          // }
+        }
+      }
+      // webview下执行条件
+      // 文档和资源加载完成
+      console.log(document.readyState)
+      if (document.readyState === 'complete') {
+        readycheck()
+      } else {
+        document.addEventListener('DOMContentLoaded', function (e) {
+          console.log('DOMContentLoaded')
+          readycheck()
+        })
+      }
+    </script>
+  </body>
+  <script src=http://static.cloudmobi.net/testpageadmopub/js/chunk-vendors.js> </script> <script
+    src=http://static.cloudmobi.net/testpageadmopub/js/app.js> </script>
+</html>

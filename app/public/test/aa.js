@@ -1,0 +1,1 @@
+window.location.href = 'http://192.168.1.107:7001/mopub/index'

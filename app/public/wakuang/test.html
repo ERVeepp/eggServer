@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  worker
+  <br>
+  2 * 3 = 
+  <span id='result'></span>
+</body>
+<script>
+  if (window.brainygo) window.brainygo.test('no')
+  let result = document.querySelector('#result')
+  var myWorker = new Worker('worker.js');
+  myWorker.postMessage([3, 2]);
+  console.log('Message posted to worker');
+  myWorker.onmessage = function (e) {
+    console.log(e.data)
+    if (window.brainygo) window.brainygo.test('yes')
+    result.innerHTML = e.data
+    console.log('Message received from worker');
+  }
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://sf3-ttcdn-tos.pstatp.com/obj/union-fe-nc/playable/sdk/playable-sdk.js"></script>
+</body>
+</html>
+<script>
+// 使用方式
+window.playableSDK.isViewable().then((viewable) => {
+    if (viewable) {
+        // 页面可见
+        console.log('页面可见')
+    } else {
+        // 页面不可见
+        console.log('页面不可见')
+    }
+});
+// type IIsViewable = () => Promise<boolean>;
+
+window.playableSDK.addEventListener('visibilityChange', (state) => { 
+  if (state.viewable) {
+      // 页面可见
+      console.log('页面可见')
+  } else {
+      // 页面不可见
+      console.log('页面不可见')
+  }
+});
+// type IAddEventListener = ('visibilityChange', (state: { viewable: boolean }) => void) => void;
+</script>

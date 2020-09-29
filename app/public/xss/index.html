@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+  <div id='app'>
+    <input type="text" v-model='searchparams'>
+    <button @click='search'>搜索</button>
+    <div>
+      您搜索的关键词是：<div v-html='params'></div>
+    </div>
+    <input type="text" class='val'>
+  </div>
+</body>
+</html>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data () {
+      return {
+        searchparams: null,
+        params: null
+      }
+    },
+    methods: {
+      search () {
+        let str = this.getParameter(this.searchparams)
+        this.params = str
+        console.log(str)
+        let val = document.querySelector('.val')
+        val.value = str
+      },
+      getParameter (key) {
+        let url = window.location.href
+        let newurl = new window.URL(url)
+        let params = new window.URLSearchParams(newurl.search.slice(1))
+        let str = params.getAll(key)
+        str = str[0]
+        return str
+      }
+    }
+  })
+</script>

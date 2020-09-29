@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="mraid.js"></script>
+  <script>
+    function getHidden() {
+      let prefixs = ['webkit', 'moz', 'mos', 'o'];
+      console.log(document.hidden)
+      if ('hidden' in document) return document.hidden;
+      for (let i = 0; i < prefixs.length; i++) {
+        if (`${prefixs[i]}Hidden` in document) {
+          return document[`${prefixs[i]}Hidden`];
+        }
+      }
+      // not support
+      return null;
+    }
+    function pageHiddenHandler() {
+      let isHidden = getHidden();
+      console.log(isHidden)
+      // 改变页面title用户观察状态
+      let msg = isHidden ? '藏起来了' : '闪现';
+      document.title = msg
+      console.log(msg)
+    }
+    document.addEventListener('visibilitychange', pageHiddenHandler, false);
+  </script>
+</head>
+<body>
+  test
+</body>
+</html>

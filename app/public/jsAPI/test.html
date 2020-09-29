@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="wwwad" style="padding:0px"></div>
+  <script type="text/javascript" src="wwwAdTag.js"></script>
+  <script>
+    function callBackForSmaato(status) {
+      console.log("callBack was called with status : " + status);
+      if (status == "ERROR") {
+        loaded = true;
+        window.location = "mopub://failLoad";
+      }
+    };
+    wwwJS.loadAd({
+      adDivId: "wwwad",
+      publisherId: REPLACE_WITH_PUBLISHER_ID,
+      adSpaceId: REPLACE_WITH_ADSPACE_ID,
+      did: "%eudid!", // Android and iOS
+      diddnt: ("%%DNT%%" == "1"),
+      keywords: "%%KEYWORDS%%",
+      latitude: "%%LATITUDE%%",
+      longitude: "%%LONGITUDE%%",
+      sync: true,
+      cb: "%%CACHEBUSTER%%",
+      dimension: "xxlarge"
+    }, callBackForSmaato);
+  </script>
+</body>
+</html>

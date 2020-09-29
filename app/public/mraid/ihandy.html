@@ -1,0 +1,100 @@
+<!-- test -->
+test
+<style>
+  html,
+  body {
+    background: red;
+    color: #ccc;
+    font-size: 66px;
+  }
+</style>
+<script>
+  const testFun = url => {
+    // ajax
+    let ajax = new XMLHttpRequest()
+    ajax.open('GET', `http://static.cloudmobi.net/testpageadmopub/${url}`, true)
+    ajax.send()
+    console.log(url)
+  }
+  testFun('test')
+  document.addEventListener('DOMContentLoaded', function (e) {
+    testFun('DOMContentLoaded')
+  })
+  const mraidInit = _ => {
+    testFun('mraidInit')
+    // 监听mraid stateChange
+    window.mraid.addEventListener('stateChange', function (state) {
+      testFun(`state______${state}`)
+    })
+  }
+  mraidInit()
+  // window.location = 'mopub://failLoad'
+</script>
+
+
+
+
+<!-- test -->
+<link href=http://static.cloudmobi.net/testpageadmopub/js/chunk-vendors.js rel=preload as=script>
+<link href=http://static.cloudmobi.net/testpageadmopub/js/app.js rel=preload as=script>
+<script>
+  window.baseH = {
+    LineItemID: '%%ADGROUPID%%',
+    AdUnitID: '%%ADUNITID%%',
+    AdUnitFormat: '%%ADUNIT_FORMAT_ESC%%',
+    BundleID: '%%BUNDLE%%',
+    CacheBuster: '%%CACHEBUSTER%%',
+    ClickURLEscaped: '%%CLICK_URL_ESC%%',
+    ClickURLUnescaped: '%%CLICK_URL_UNESC%%',
+    CreativeID: '%%CREATIVEID%%',
+    CreativeType: '%%CREATIVE_TYPE_ESC%%',
+    DestinationURLDoubleEscaped: '%%DEST_URL_ESC_ESC%%',
+    DestinationURLEscaped: '%%DEST_URL_ESC%%',
+    DestinationURLUnescaped: '%%DEST_URL%%',
+    DeviceID: '%eudid!',
+    DoNotTrack: '%%DNT%%',
+    IPAddress: '%%IPADDRESS%%',
+    Keywords: '%%KEYWORDS%%',
+    Keywordsspecifickey: '%%KEYWORD:[key]%%',
+    Latitude: '%%LATITUDE%%',
+    Longitude: '%%LONGITUDE%%',
+    PlacementID: '%%PLACEMENTID%%',
+    RequestID: '%%REQUESTID%%',
+    UserAgent: '%%USERAGENT%%'
+  }
+</script>
+<script src=http://static.cloudmobi.net/testpageadmopub/js/chunk-vendors.js></script>
+<script src=http://static.cloudmobi.net/testpageadmopub/js/app.js></script>
+
+
+<!-- deploy -->
+<link href=http://static.cloudmobi.net/pageadmopub/js/chunk-vendors.js?v=1 rel=preload as=script>
+<link href=http://static.cloudmobi.net/pageadmopub/js/app.js?v=1 rel=preload as=script>
+<script>
+  window.baseH = {
+    LineItemID: '%%ADGROUPID%%',
+    AdUnitID: '%%ADUNITID%%',
+    AdUnitFormat: '%%ADUNIT_FORMAT_ESC%%',
+    BundleID: '%%BUNDLE%%',
+    CacheBuster: '%%CACHEBUSTER%%',
+    ClickURLEscaped: '%%CLICK_URL_ESC%%',
+    ClickURLUnescaped: '%%CLICK_URL_UNESC%%',
+    CreativeID: '%%CREATIVEID%%',
+    CreativeType: '%%CREATIVE_TYPE_ESC%%',
+    DestinationURLDoubleEscaped: '%%DEST_URL_ESC_ESC%%',
+    DestinationURLEscaped: '%%DEST_URL_ESC%%',
+    DestinationURLUnescaped: '%%DEST_URL%%',
+    DeviceID: '%eudid!',
+    DoNotTrack: '%%DNT%%',
+    IPAddress: '%%IPADDRESS%%',
+    Keywords: '%%KEYWORDS%%',
+    Keywordsspecifickey: '%%KEYWORD:[key]%%',
+    Latitude: '%%LATITUDE%%',
+    Longitude: '%%LONGITUDE%%',
+    PlacementID: '%%PLACEMENTID%%',
+    RequestID: '%%REQUESTID%%',
+    UserAgent: '%%USERAGENT%%'
+  }
+</script>
+<script src=http://static.cloudmobi.net/pageadmopub/js/chunk-vendors.js?v=1> </script> <script
+  src=http://static.cloudmobi.net/pageadmopub/js/app.js?v=1> </script>
