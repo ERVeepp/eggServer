@@ -47,7 +47,8 @@ class userController extends Controller {
     // }
     // 校验 `ctx.request.body` 是否符合我们预期的格式
     // 如果参数校验未通过，将会抛出一个 status = 422 的异常
-    ctx.validate(loginRule, ctx.request.body);
+    console.log(ctx.request.body)
+    // ctx.validate(loginRule, ctx.request.body);
     ctx.body = await ctx.service.user.login(ctx.request.body);
     // try {
     //   ctx.validate(loginRule, ctx.request.body);

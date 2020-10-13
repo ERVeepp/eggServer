@@ -27,7 +27,6 @@ class userController extends Controller {
 
   async index() {
     const { ctx } = this
-    console.log(ctx.state);
     /* 
     * 打印内容为：{ username : 'admin', iat: 1560346903 }
     * iat 为过期时间，可以单独写中间件验证，这里不做细究

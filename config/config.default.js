@@ -69,6 +69,12 @@ module.exports = appInfo => {
     formLimit: '1mb',
   }
 
+  // auth
+  config.auth = {
+    enable: true,
+    match: '/api'
+  }
+
   // koa-compress
   config.compress = {
     threshold: 2048,
@@ -261,7 +267,7 @@ module.exports = appInfo => {
   config.jwt = {
     secret: '123456',
     // jwtSecret: 'shared-secret',
-    jwtExpire: '20s',
+    jwtExpire: '30s',
     WhiteList: ['/UserLogin', '/login', '/site/login']
   }
 

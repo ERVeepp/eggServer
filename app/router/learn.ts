@@ -51,6 +51,7 @@ export default (app: Application) => {
   router.post('/login', controller.user.login);
   router.post('/site/login', controller.myuser.login);
   router.post('/site/index', jwt, controller.myuser.index);
+  router.post('/api/index', jwt, controller.myuser.index);
 
   // 登录校验
   app.passport.mount('github');
