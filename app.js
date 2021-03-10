@@ -1,6 +1,10 @@
 'use strict';
 const LocalStrategy = require('passport-local').Strategy;
 const debug = require('debug')
+const ThinkingAnalytics = require("thinkingdata-node")
+var ta = ThinkingAnalytics.initWithDebugMode("APP-ID", "https://SERVER_URL")
+console.log(1)
+console.log(ta)
 class AppBootHook {
   constructor(app) {
     globalThis.app = app;
