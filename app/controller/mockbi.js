@@ -8,6 +8,11 @@ class MockBiController extends Controller {
     const { ctx } = this;
     ctx.body = { "code": 200, "info": "Login successful", "data": { "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjVNeUdMR2pPQTIifQ.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6OTUyNyIsImF1ZCI6Imh0dHA6XC9cL2FkbWluLmFkc3Bvb2xzLmNuIiwianRpIjoiNU15R0xHak9BMiIsImlhdCI6MTYxMzk3NDgyMCwibmJmIjoxNjEzOTc0ODIwLCJleHAiOjE2MTQwNjEyMjAsInVzZXIiOnsiaWQiOjEsImVtYWlsIjoiZGV2QHFxLmNvbSIsIm5hbWUiOiJcdTczOGJcdTRmMWYiLCJyb2xlX2lkIjoxLCJwbV9pZCI6NjYsInRva2VuIjoiZWNlZjk1MzJlM2VlNmU4NDNkNTA3MmMzM2UwNmJlYzEifX0.9QndDP-RLxNi1Bs7tjmDRu_8YtXQkstkwBJIxByf2CQ" } }
   }
+  // getinfo
+  async getInfo() {
+    const { ctx } = this
+    ctx.body = {"success":true,"code":200,"message":"OK","data":{"menu":["1","2","3","4","5","3","7","8","9", "10", "11", "12", "13"],"element":["1","2","1"]}}
+  }
   // 获取权限表
   async getRoles() {
     const { ctx } = this;
